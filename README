@@ -1,0 +1,24 @@
+OVERVIEW AND LICENSE INFORMATION
+
+DESCRIPTION
+
+This repository consists of LaTeX files and associated files used to generate textbooks, as well as the generated PDF. These textbooks are ``living works'' with the intent that they evolve and grow. While never finished, these works are mature enough to use for teaching college courses. Feedback and corrections are highly welcome. My contact information is bckiedro@umich.edu.
+
+There are currently three textbooks included:
+(1) Applied Mathematics for Engineering Physics -- supports a junior level engineering math course following a standard calculus and differential equations sequence.
+(2) Introductory Nuclear Reactor Theory -- supports an undergraduate or first-year graduate nuclear reactor theory course. It is meant to serve as a spiritual successor to Duderstadt and Hamilton, an excellent, but dated, work.
+(3) Nuclear Reactor Analysis -- supports a graduate level course on the computational methods used for nuclear reactor analysis for conventional light-water reactors. The content is pulled from several references, with much of the content derived from Stammler and Abbate's (now out of print) classic text.
+
+EDUCATIONAL USE
+
+These textbooks may be freely used for educational purposes, either personal or to support teaching. If used as a textbook for a course, I request a courtesy email to bckiedro@umich.edu indicating as such. This allows for me to measure the impact of the works.
+
+These textbooks are provided on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any associated risks.
+
+MERCHANTABILITY AND PRODUCTION OF DERIVATIVE WORKS
+
+The author (Brian Kiedrowski) retains rights to all parts of the source code and finished products. Derivative works based on these texts are permitted subject to the following restrictions:
+(1) Brian Kiedrowski shall retain primary/first authorship followed by those authoring the derivative work.
+(2) The authorship in the lower-left corner of each page shall be present in all derivative works and shall include B.C. Kiedrowski as first author.
+(3) Neither the originals nor derivative works shall be commercialized, sold for profit, nor submitted to a publisher without the consent of Brian Kiedrowski.
+(4) All derivative works must include the text in this OVERVIEW AND LICENSE INFORMATION DOCUMENT. Authors of derivative works may provide additional terms and conditions. In the event that there is a conflict, the terms and conditions in the original document shall take precedence.
