@@ -1,0 +1,150 @@
+\documentclass[12pt]{book}
+\usepackage{epsf,epsfig,latexsym}
+\usepackage{amsmath,amssymb,amstext}
+\usepackage{bm}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{cancel}
+\usepackage{needspace}
+\usepackage[toc,page]{appendix}
+%\usepackage{hyperref}
+\usepackage{url}
+\usepackage[hidelinks,bookmarks=true]{hyperref}
+\usepackage{pgfplots}
+\usepackage{calc}
+\usepackage{fancyhdr}
+\usepackage{pgffor}
+\usepackage{subcaption}
+%\usepackage{fontspec}
+\usepackage{mathtools}
+%\newcommand{\lambdabar}{{\setmainfont{Linux Libertine O}\text{\symbol{"019B}}}}
+
+
+
+
+\usetikzlibrary{external,arrows,decorations.pathmorphing,calc}
+\tikzexternalenable
+
+%\usetikzlibrary{calc}
+%\usepackage{showkeys}
+\pagestyle{plain} 
+\renewcommand{\baselinestretch}{1.0}
+\setlength{\topmargin}{-0.4in} 
+\setlength{\oddsidemargin}{0.25in} 
+\setlength{\evensidemargin}{0.25in} 
+\setlength{\textwidth}{6.0in} 
+\setlength{\textheight}{9.0in} 
+\allowdisplaybreaks
+%
+\newcommand{\version}{version 1.11.1}
+% version #: year offered (winter 2024 = 1) . major version (new content) . minor revision (fixes)
+
+
+
+\renewcommand{\theequation}{\thechapter-\arabic{equation}}
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\newcommand{\pos}{\bm{x}} 
+\newcommand{\dir}{\hat{\mathbf{\Omega}}}
+\newcommand{\erg}{E}
+\newcommand{\rde}{\mathbf{p}}
+\newcommand{\us}{\textmu s}
+\newcommand{\dho}[2]{ \frac{ \partial {#1} }{ \partial {#2} } }
+\newcommand{\dhotwo}[2]{ \frac{ \partial^2 {#1} }{ \partial {#2}^2 } }
+\newcommand{\sps}[1]{${}^{#1}$}
+\newcommand{\sbs}[1]{${}_{#1}$}
+\newcommand{\eff}{\textrm{eff}}
+\newcommand{\icm}{cm\sps{-1}}
+\newcommand{\erf}{\mathrm{erf}}
+\newcommand{\hypergeom}[5]{ {}_{#1} F_{#2} \left( {#3} ; {#4} ; {#5} \right) }
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\newcommand*\rfrac[2]{{}^{#1}\!/_{#2}}
+\newcommand{\lambdabar}{{\mkern0.75mu\mathchar '26\mkern -9.75mu\lambda}}
+
+\newcommand{\ihat}{\hat{\mathbf{i}}}
+\newcommand{\jhat}{\hat{\mathbf{j}}}
+\newcommand{\khat}{\hat{\mathbf{k}}}
+\newcommand{\nhat}{\hat{\bm{n}}}
+\newcommand{\rhat}{\hat{\mathbf{r}}}
+\newcommand{\thetahat}{\hat{\boldsymbol\theta}}
+\newcommand{\xhat}{\hat{\mathbf{x}}}
+\newcommand{\yhat}{\hat{\mathbf{y}}}
+\newcommand{\zhat}{\hat{\mathbf{z}}}
+\newcommand{\phihat}{\hat{\boldsymbol\phi}}
+\newcommand{\uhat}{\hat{\mathbf{u}}}
+\newcommand{\vhat}{\hat{\mathbf{v}}}
+\newcommand{\what}{\hat{\mathbf{w}}}
+\newcommand{\evec}{\mathbf{e}}
+
+\newcommand{\var}{\textrm{Var}}
+\newcommand{\cov}{\textrm{Cov}}
+
+\newcommand{\kin}{\textrm{Ki}}
+
+
+\renewcommand{\det}[1]{\mathrm{det} \hspace{-0.05cm} \left( \mathbf{#1} \right) }
+
+\pagestyle{fancy}
+\lhead{\tiny \leftmark}
+\rhead{\tiny \rightmark}
+\lfoot{\tiny B.C. Kiedrowski}
+\rfoot{\tiny \today}
+
+\renewcommand{\floatpagefraction}{0.99}
+
+%\pgfplotsset{grid style={help lines}}
+%\pgfplotsset{major grid style={thick,dashed}}
+
+%
+% Problem Environment
+\newcounter{problemcounter}[chapter]%
+\renewcommand{\theproblemcounter}{\thechapter.\arabic{problemcounter}}
+\newenvironment{problem}{%
+  \needspace{6cm}
+  \refstepcounter{problemcounter}%
+  \par\medskip\noindent\textbf{\theproblemcounter) \hspace{1em}}%
+}{%
+  \par\medskip\ignorespacesafterend%
+}
+% Problem Part Environment
+\newcounter{subproblemcounter}[problemcounter]%
+\renewcommand{\thesubproblemcounter}{\alph{subproblemcounter}}
+\newenvironment{subproblem}{%
+  \refstepcounter{subproblemcounter}%
+  \par\medskip\noindent\textbf{\hspace{0.3em} (\thesubproblemcounter) }%
+}{%
+  \par\medskip\ignorespacesafterend%
+}
+%
+\titleformat
+{\chapter} % command
+[display] % shape
+{\bfseries\LARGE} % format
+{Chapter \ \thechapter} % label
+{0.5ex} % sep
+{
+    \rule{\textwidth}{1pt}
+    \vspace{1ex}
+    \centering
+} % before-code
+[
+\vspace{-0.5ex}%
+\rule{\textwidth}{0.3pt}
+] % after-code
+%-
+%\renewcommand{\arraystretch}{1.5}
+
+\begin{document}  
+
+\input{./Intro/fra_intro.tex}
+
+
+\clearpage
+%\pagenumbering{arabic}
+\input{./Ch1_LibraryGeneration/fra_libraryGeneration.tex}
+\input{./Ch2_Transport/fra_transport.tex}
+\input{./Ch3_Diffusion/fra_diffusion.tex}
+
+\end{document}

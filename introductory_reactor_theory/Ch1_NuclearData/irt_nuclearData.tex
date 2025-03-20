@@ -1,0 +1,1721 @@
+\chapter{Nuclear Physics \& Data} \label{Sec:nuclearData}
+
+The behavior of nuclear fission reactors is controlled by the interactions of neutrons with nuclei. Even though nuclear physics has existed as a discipline since the discovery of the atomic nucleus by Rutherford in 1911, a theoretical description that can yield consistent predictions that are even remotely useful remains frustratingly elusive. This may seem surprising because quantum theory is frequently used to make all manner of quite accurate predictions about the behavior of atomic properties that inform chemistry. So one is led to the question: Why is nuclear physics so darned hard?
+
+One reason is because of the nature of the interactions. Chemistry is driven by the physics of electrons surrounding an atom. These electrons are governed solely by one fundamental force: electromagnetism. The nucleus, on the other hand, is influenced by two fundamental forces: electromagnetism and the strong nuclear force. (There is a third fundamental force at play, the weak nuclear force that describes certain radioactive decay modes, but this is not directly relevant to understanding the structure of the nucleus itself.)  The latter of these describes the interaction between quarks that comprise the nucleus and gluon carrier particles. The interactions of the strong nuclear force are more varied and far more complicated than those of electromagnetism. 
+
+Furthermore, the quantum behavior of electromagnetism, quantum electrodynamics, is amenable to a convenient mathematical ``hack'' called perturbation methods. Here, all the various interactions between charged particles can be enumerated using Feynman diagrams, and the contribution from increasingly complicated interactions quickly becomes negligible. Unfortunately, this is not the case for interactions with the strong nuclear force. The number of significant interactions required to accurately describe them is intractably large. Mathematically, one can state that the series expansion of increasingly high-order interactions converges very slowly. In fact, even the best computational models for solving the governing equations, called quantum chromodyanmics, fail to accurately describe nuclear properties.
+
+So one may be tempted to just ask: why don't physicists just throw up their hands, give up on theory altogether, and just go out and measure everything important? It is much more than just pure obstinance. While there has been steady progress over several decades on the experimental front---new and more powerful experimental facilities have been built (see the Facility for Rare-Isotope Beams or FRIB at Michigan State University), detectors have become increasingly sensitive and provide ever improving resolution, computation has enabled sifting through and analyzing large datasets, and the amount of data ever grows as time goes on---the state space that needs to be mapped out is extremely large. The number of relevant isotopes, either stable or long-lived enough to be pertinent, numbers in the hundreds. Each isotope has many possible neutron interactions. Furthermore, there is a large range of relevant incident neutron energies, for which the interaction properties depend strongly, spanning orders of magnitude from $10^{-3}$ through $10^7$ eV. Unfortunately, a purely empirical approach is infeasible as well.
+
+Despite all of this (and perhaps miraculously) there are expansive and detailed libraries of nuclear interaction data that allow for the development of nuclear fission reactors, among numerous other applications. This is only possible because of a fusion of theoretical modeling and experimental data, along with some occasional ad hoc hand-tuning to match relevant applications, that is performed by highly trained experts called nuclear data evaluators (or wizards in some corners).
+
+As a nuclear engineer seeking to understand fission reactors, it is important to know how to interpret the data contained within these libraries. Beyond this, a smaller community containing both nuclear engineers and nuclear physicists are involved in their creation. Furthermore, the nuclear data is far from perfect, and there continue to be several gaps and needs for improvement to support ongoing and emerging needs. So even a nuclear reactor physicist needs some understanding of where the data comes from, if for no other reason than being able to interface with the nuclear data evaluators. For example, the reported values of the (n,p) capture cross section of $^{35}$Cl is significantly different between different evaluations, which is actually quite common. This was not a serious concern beyond basic scientific considerations until there was interest in designing and commercializing molten chloride fast reactors (MCFRs). The data from one evaluation suggested that this capture cross section was large enough that it would be necessary to enrich the chlorine to increase the abundance of $^{37}$Cl relative to $^{35}$Cl, since the fast neutron capture cross section in the former is known to be very small. The identification of this need spawned efforts to conduct better measurements of $^{35}$Cl cross sections. As of the writing, the latest preliminary measurements suggest, fortunately, that the (n,p) $^{35}$Cl capture cross section is not nearly as large as predicted and enriching the chlorine can be avoided.
+
+This chapter begins with a discussion of basic nuclear properties about binding energy and structure. Next, the concepts of nuclear reaction types and the the nuclear cross section and attenuation are developed. Here a connection to quantum theory is shown. Following this, the topic of nuclear resonances, which have a huge impact on the behavior of neutrons in every nuclear reactor, is covered. Then, the physics of nuclear fission and scattering are discussed in their own respective sections. Finally, with the foundation in place, the all-important nuclear data libraries are covered.
+
+\section{Properties and Mathematical Concepts}
+
+Each element on the periodic table is defined by the number of protons within its nucleus. The is characterized by the charge number,
+\begin{align}
+  Z = \text{the number of protons in an atom's nucleus.} \nonumber
+\end{align}
+Each element has different species having their own respective masses called isotopes, which is because of the differing number of neutrons for the same number of protons. In nuclear reactor theory, we characterize an isotope by the atomic-weight ratio
+\begin{align}
+  A &= \frac{\text{mass of the atom}}{\text{mass of a free neutron}} \nonumber \\
+    &\approx \text{number of protons plus neutrons (or nucleons)} . \nonumber
+\end{align}
+The latter approximation of the atomic-weight ratio is called the mass number and is often used interchangeably, which is almost always acceptable for hand calculations. (For actual engineering calculations, please use the correct values.)
+
+The size of a typical nucleus is on the order of a few femtometers where 1 fm is $10^{-15}$~m. Conversely, the size of an atom is on the order of an angstrom or $10^{-10}$~m. An important (and obvious, to anyone who thinks about it) point is that most of matter is actually empty space where only a tiny fraction is taken up by the nucleus with the rest being the cloud of electrons bound to that nucleus. The consequence of this is that neutrons, being electrically neutral and only interacting with the nucleus by way of the strong nuclear force, will (on average) pass through a large number of atoms and only ``feels'' the effect of the nucleus rarely. The way the numbers work out is that the range of neutrons in matter is on macroscopic or engineering scales and determines the size of nuclear fission reactors.
+
+\subsection{Nuclear Structure}
+
+While sometimes it is useful to think of the nucleus as a rigid spherical object, the collection of neutrons and protons give it shape, internal structure, and dynamics. Because nuclei are so small, they are subject to the laws of quantum mechanics. A key result of this is that objects in a steady, bound state are restricted to having discrete energy levels---mathematically the time-independent Schr\"{o}dinger equation is an eigenvalue problem where these discrete energies correspond to the eigenvalues. The discrete energy levels permit different ``arrangements'' of neutrons and protons within the nucleus with the ground state being the most stable state. Additionally, there are ``collective effects'' where the nucleus itself can be excited and vibrate with discrete natural frequencies or modes in different energy states.
+
+Neutrons with sufficient kinetic energy can put a nucleus that is nominally in its ground state into an excited one. The de-excitation of nuclei, either from the rearrangement of nucleons is typically done through the emission of an photon or gamma ray with an energy corresponding to the difference between two discrete nuclear levels. This phenomenon explains the ``lines'' observed in experimental measurements.
+
+Most nuclear excited states are exceptionally short-lived on the human time scale, typically lasting on a timescale best described in terms of picoseconds (1 ps = $10^{-12}$~s). There are a few notable excited states that are exceptionally stable and persist for a very long time. These are called metastable states and are typically denoted for example as $^{242\text{m}}$Am, which is the metastable state of americium-242, which has a half life of approximately 140 years.
+
+\subsection{Radioactivity and Decay Chains}
+
+Most isotopes encountered in everyday experience are stable. However, nuclear engineers often deal with isotopes that are unstable and radioactive. In the context of nuclear reactor analysis, this is particularly relevant because all nuclear fuels are, to some degree, radioactive and, more importantly, the nuclear reactions (especially fission) lead to the creation of radioactive isotope byproducts that influence the operation of the reactor. Additionally, the production and long-term safe disposition of these byproducts is both a technical challenge in and of itself and remains one of the largest societal hurdles for the adoption of nuclear energy.
+
+Radioactive isotopes are most commonly characterized by their half-life $t_{1/2}$, which is the time it takes for half of the population of a particular radioactive isotope undergo decay. When doing calculations, it is more convenient to work with a quantity called the decay constant, which is related to the half life by
+\begin{align}
+  \lambda = \frac{ \ln(2) }{ t_{1/2} } .
+\end{align}
+The decay constant has units of inverse time and can be thought of as an intensity of radioactive decay. 
+
+The dynamics of radioactive decay are such that underlying mechanisms within the nucleus that initiate the decay are constant in time. This leads to radioactive decay being a Poisson process such that the time to decay is exponentially distributed. The probability per unit time of a radioisotope undergoing a radioactive decay is
+\begin{align}
+  p(t) = \lambda e^{-\lambda t}, \quad t \ge 0.
+\end{align}
+We can derive the expected time to decay as
+\begin{align}
+  \overline{t} = \int_{-\infty}^\infty t p(t) dt = \int_0^\infty t e^{-\lambda t} dt = \frac{1}{\lambda}.
+\end{align}
+This means the average time to decay is the reciprocal of the decay constant.
+
+The dynamics of radioactive decay for a large population of radioisotopes are described by d differential balance equation,
+\begin{align}
+  \left( \parbox{10em}{time rate of change of the isotopic population} \right) = 
+  \left( \parbox{8em}{rate that isotopes are produced} \right) - 
+  \left( \parbox{8em}{rate that isotopes undergo decay} \right). \nonumber
+\end{align}
+Let $n(t)$ be the \emph{density} of radioisotopes, i.e., the number of isotopes per unit volume in a region. For the case of simple radioactive decay with constant production rate per unit volume $Q_0$, this is
+\begin{align}
+  \frac{dn}{dt} = Q_0 -\lambda n(t) , \quad n(0) = n_0 .
+\end{align}
+This can be solved using an integrating factor to obtain the solution
+\begin{align}
+  n(t) = n_0 e^{-\lambda t} + \frac{Q_0}{\lambda} ( 1 - e^{-\lambda t} ) .
+\end{align}
+We can interpret each term as follows. The first term denotes the initial population of radioisotopes decaying away. The second term describes the buildup of radioisotopes from constant production. After a long time, all radioisotopes that were in the system at time $t = 0$ will have decayed and the population will asymptotically approach a constant population $Q_0/\lambda$.
+
+In general, radioisotopes are part of a decay chain. Furthermore, in a nuclear reactor, the neutrons are transmuting isotopes into other isotopes. The general equation for the $i$th radioisotope population in a chain is
+\begin{align}
+  \frac{dn_i}{dt} = Q_i(t) - ( \lambda_i + \sigma_i \phi(t) ) n_i(t) + \sum_j ( \gamma_{ji} \lambda_j + \sigma_{ji} \phi(t) ) n_j(t) .
+\end{align}
+Let's unpack this term by term.
+
+The first term is simply an inhomogeneous source of radioisotopes into our region. One could envision feeding an isotope into the nuclear reactor at some rate as part of a process to produce a particular radioisotope.
+
+The second term is a loss term from two components. The first is familiar radioactive decay with decay constant $\lambda_i$. The second term describes the conversion of radioisotope $i$ into other radioisotopes because of nuclear reactions. Here the product $\sigma_i \phi(t)$ is a reaction rate coefficient. We will describe what these terms mean later. Save to say $\sigma_i$ is some parameter called a nuclear cross section and $\phi(t)$ describes the neutron field, but let's not get ahead of ourselves.
+
+The final term with the summation is a gain rate describing all other radioisotopes $j$ that end up producing $i$. Here $\gamma_{ji}$ is called the \emph{branching ratio}, which is the probability that radioisotope $i$ will be produced from a decay of radioisotope $j$. This branching ratio is needed because many radioisotopes undergo different (random) decay modes. Here $\sigma_{ji} \phi(t)$ plays a similar role as in the last term, except here this describes the specific reaction channel for the conversion of isotope $j$ into $i$ by way of nuclear reactions.
+
+After writing down this equation for each radioisotope $i$, we can form a linear system of ordinary differential equations that we call the Batemann equations. If we assume no inhomogeneous source and that the function $\phi(t)$ is constant, i.e., the neutron field is not changing in the reactor with time, then we can write these in matrix-vector form as
+\begin{align}
+  \frac{d \mathbf{n}}{dt} = -\mathbf{A} \mathbf{n}(t), \quad \mathbf{n}(0) = \mathbf{n}_0.
+\end{align}
+Here $\mathbf{n}(t)$ is a column vector with the radioisotope densities and $\mathbf{A}$ is the (square) matrix of coefficients in our system of equations. This can solved in terms of the matrix exponential
+\begin{align}
+  \mathbf{n}(t) = \exp( t \mathbf{A} ) \mathbf{n}_0 .
+\end{align}
+
+The exponential of a square matrix is another square matrix that is \emph{not} generally the exponential of the elements. Rather, it is defined by the Taylor series expansion
+\begin{align}
+  \exp( t \mathbf{A} ) = \mathbf{I} + t \mathbf{A} + \frac{t^2}{2!} \mathbf{A}^2 + \frac{t^3}{3!} \mathbf{A}^3 + \ldots
+\end{align}
+Here $\mathbf{I}$ is the identity matrix and $\mathbf{A}^k$ is the result of doing matrix multiplication of $\mathbf{A}$ by itself $k$ times. Note that if $\mathbf{A}$ is a diagonal matrix, call it $\mathbf{D}$, then from this definition we can easily show that (exercise for the reader) that in this special case, $\exp{D}$ is simply another diagonal matrix with each term exponentiated.
+
+While this is a formal definition of the matrix exponential, we rarely ever in practice use it to compute the matrix exponential. Rather, we employ an \emph{eigendecomposition}, which involves finding the eigenvalues and eigenvectors of $\mathbf{A}$. Let $\boldsymbol\Lambda$ be a diagonal matrix of eigenvalues and $\mathbf{V}$ be a matrix where each column is the eigenvector corresponding to the eigenvalue in $\boldsymbol\Lambda$. We can then write the matrix exponential as
+\begin{align}
+   \exp( t \mathbf{A} ) = \mathbf{V} \exp( t \boldsymbol\Lambda ) \mathbf{V}^{-1} .
+\end{align}
+Here $\mathbf{V}^{-1}$ is the matrix inverse of $\mathbf{V}$. Since $\boldsymbol\Lambda$ is a diagonal matrix, then we can simply evaluate $\exp( t \boldsymbol\Lambda )$ by exponentiating each diagonal element. This decomposition assumes that $\mathbf{A}$ is diagonalizable. It is for any practical case we would encounter for this particular application.
+
+\subsection{Energetics}
+
+A nucleus is \emph{lighter} than the sum of the masses of its constituent neutrons and protons. This deficit is called the nuclear binding energy, which from Einstein's energy-mass equivalence principle is
+\begin{align}
+  E_b = ( A m_n - Z m_p - N m_n ) c^2 ,
+\end{align}
+where $m_n$ and $m_p$ are the rest masses of the neutron and proton, $A m_n$ is the mass of the nucleus, and $N$ is the number of neutrons. Note that $A$ om this equation is the atomic weight ratio and not the number of nucleons.
+
+Given this, we can define the $Q$ value for a nuclear reaction as the negative change in the binding energy
+\begin{align}
+  Q = -\Delta E_b.
+\end{align}
+Current nuclear reactors rely on splitting or fissioning heavy isotopes such as uranium or plutonium. The ability to fission is a consequence of several factors, but chief among them is the typical binding energy per unit mass tends to decrease as elements get heavier past iron on the periodic table. In other words, if a nucleus is heavy enough, then if it were to be split, the two resulting fragments will have a lower binding energy (the $Q$ value is positive), which makes nuclear fission energetically possible. 
+
+For nuclear reactions, we often quote our energies in units of electron volts (eV) or millions of electron volts (MeV). An electron volt is the amount of energy to accelerate one unit of elementary charge through one volt of electric potential. The relationship between an electron volt and a Joule is
+\begin{align}
+  1 \text{ eV} = 1.6022 \times 10^{-19} \text{ J}. \nonumber
+\end{align}
+As we can see 1 eV is an extremely small amount of energy on macroscopic scales. With typical nuclear reactions having energies in the MeV range, it turns out we do not need much nuclear fuel to release a very large amount of energy. Inserting numbers into the $Q$-value expression reveals what makes nuclear energy attractive as a power source. A typical fission reaction produces about 200~MeV of energy. Compared with chemical reactions, nuclear fuels are a million times more energy dense. This energy release goes into kinetic energy of the products of the reaction, which then slow down through electromagnetic interactions in a medium, converting that kinetic energy into heat. This thermal energy can then be run through a thermodynamic power cycle to produce useful electrical work.
+
+\subsection{Atomic Density and Mixtures}
+
+Typically we characterize a material with its atomic density, which is usually given in units of atoms per barn per cm where 1~barn is $10^{-24}$~cm$^2$. (We could use atoms per cm$^3$, but this would yields numbers that are quite large and carry around large exponents in scientific notation that are going to cancel out anyway is kind of annoying.) The atomic density of a material is related to its mass density $\rho$ (units of grams per cm$^3$) of the material by
+\begin{align}
+  N = \frac{\rho N_A}{M}.
+\end{align}
+Here $N_A$ is Avogadro's number
+\begin{align}
+  N_A = 6.022 \times 10^{-1} \text{ atoms$\cdot$cm$^2$$\cdot$b$^{-1}$$\cdot$mol$^{-1}$} \nonumber
+\end{align}
+and $M$ is the molar mass of the material in units of grams per mol.
+
+Most often, actual materials are mixtures of several isotopes. Let $a_i$ be the atomic or molar fraction of isotope $i$. We can then write the atomic density of the $i$th isotope as
+\begin{align}
+  N_i = a_i N = a_i \frac{ \rho N_A}{M} .
+\end{align}
+It is often convenient to work with weight or mass fractions. The mass fraction of a isotope $i$ in a sample is defined as the mass of isotope $i$ in that sample divided by the total mass of the sample. Through some basic unit conversion, we can relate the mass and atom fraction
+\begin{align}
+  w_i = \frac{M_i}{M} a_i,
+\end{align}
+where $M_i$ is the molar mass of isotope $i$. The atomic density in terms of the mass fraction is then
+\begin{align}
+  N_i = w_i \frac{ \rho N_A}{M_i} .
+\end{align}
+
+Conventional nuclear reactors use enriched uranium that is described by its enrichment $w_{235}$ and typically quoted as a mass fraction. Uranium contains three natural radioisotopes, the fissile $^{235}$U that comprises the actual fuel, $^{238}$U that is the bulk amount of the remainder, and a small amount of $^{234}$U. If we neglect $^{234}$U and approximate the molar masses of $^{235}$U as 235 g/mol and $^{238}$U g/mol, we can derive an expression relating the for the atomic fraction of $^{235}$U within the uranium as
+\begin{align}
+  a_{235} = \frac{ 1.0128 w_{235} }{ 1 + 0.0128 w_{235} } .
+\end{align}
+This is referred to as the \emph{atomic enrichment}. 
+
+\subsection{Legendre Polynomials}
+
+Let's pause for a moment and discuss the Legendre polynomials in case you are not familiar with them. The Legendre polynomial is a very special polynomial that naturally arises in many mathematical and physical problems and will come up repeatedly throughout the study of nuclear physics and engineering. It has two major properties. First, it is defined upon the domain $[-1,1]$, which is obviously true of $\cos\theta$. Second, it satisfies an orthogonality property, which is
+\begin{align} \label{Eq:nuclearData_legendrePolynomialOrthogonality}
+  \int_{-1}^1 P_\ell(x) P_m(x) dx = \frac{2}{2 \ell + 1 } \delta_{\ell m}.
+\end{align}
+The function $\delta_{\ell m}$ is called the \emph{Kronecker delta} that is one when $\ell = m$ and zero otherwise, i.e.,
+\begin{align} 
+  \delta_{\ell m} = \left\{ \begin{array}{l l}
+  1,		& \quad \ell = m, \\
+  0,		& \quad \text{otherwise}. \\ \end{array} \right. 
+\end{align}
+This orthogonality property allows us to decouple the equations for different $\ell$ and then take the general solution as a linear combination. The first two Legendre polynomials are
+\begin{subequations}
+\begin{align}
+  P_0(x) &= 1, \\*
+  P_1(x) &= x, 
+\end{align}
+and the remaining can be obtained from a recursion relation,
+\begin{align}
+  P_{\ell+1}(x) = \frac{ ( 2\ell + 1 ) x P_\ell(x) - \ell P_{\ell-1}(x) }{ \ell + 1 }, \quad \ell \ge 1.
+\end{align}
+\end{subequations}
+Finally, any function $f(x)$ can be expanded using the Legendre polynomials
+\begin{align}
+  f(x) = \sum_{\ell=0}^\infty \frac{ 2 \ell + 1 }{ 2 } f_\ell P(x) ,
+\end{align}
+where $f_\ell$ is called the $\ell$th Legendre moment of $f(x)$ defined by
+\begin{align}
+  f_\ell = \int_{-1}^1 f(x) P_\ell(x) dx .
+\end{align}
+These Legendre polynomials will come up periodically throughout these notes, so keep them in the back of your mind and come back to this section when you need to review them.
+
+\subsection{Direction Vector and Solid Angle}
+
+Another concept that arises throughout both nuclear and reactor physics is the need to describe directionality and solid angle. We describe the direction something (here a neutron) is moving in with a unit vector:
+\begin{align}
+  \dir = \Omega_x \ihat + \Omega_y \jhat + \Omega_z \khat .
+\end{align}
+with
+\begin{align}
+  \Omega_x^2 + \Omega_y^2 + \Omega_z^2 = 1. \nonumber
+\end{align}
+We can think of $\dir$ as a vector originating from the origin of some coordinate system and pointing to some location on the unit sphere centered about that coordinate system. In this manner if $\mathbf{r}$ is a vector
+\begin{align}
+  \mathbf{r} = x \ihat + y \jhat + z \khat .
+\end{align}
+Then the direction vector is
+\begin{align}
+  \dir = \frac{ \mathbf{r} }{ | \mathbf{r} | },
+\end{align}
+where $| \mathbf{r} |$ is the magnitude of $\mathbf{r}$ given by
+\begin{align}
+  | \mathbf{r} | = \sqrt{ x^2 + y^2 + z^2 } .
+\end{align}
+
+We often express the vector components of $\dir$ using spherical coordinates. We will let $\theta$ be the polar angle with respect to the $z$ axis. The polar angle has the range $[0,\pi]$ with $\theta = 0$ being along the positive $z$ axis (the north pole) and $\theta = \pi$ being along the negative $z$ axis. To simplify some notation, we conventionally define
+\begin{align}
+  \mu = \cos\theta .
+\end{align}
+By extension,
+\begin{align}
+  \sin\theta = \sqrt{ 1 - \mu^2 } . 
+\end{align}
+Next, we define the azimuthal angle $\gamma$ with the range $[0,2\pi)$. Given these definitions, we can write our direction vector as
+\begin{align}
+  \dir 	&= \sin\theta \cos\gamma \ihat + \sin\theta \sin\gamma \jhat + \cos\theta \khat, \nonumber \\*
+  		&= \sqrt{ 1 - \mu^2 } \cos\gamma \ihat + \sqrt{ 1 - \mu^2 }  \sin\gamma \jhat + \mu \khat .
+\end{align}
+
+We should be familiar with the concept of an angle, where $\theta$ in radians gives the length of an arc on the unit circle. We can extend this 1-D notion of length to 2-D area by defining solid angle to be a patch of area on the unit sphere with units of \emph{steradians}, often abbreviated $sr$. Just as there are $2\pi$ radians on a unit circle, there are $4\pi$ steradians on a unit sphere. Like radians, the steradian unit is dimensionless and often thought of as area over area.
+
+We often use solid angle to describe the range of directions that a neutron is traveling. To this end, we often end up integrating over a range of directions. This motivates us to define the differential solid angle $d\Omega$. Taking a clue from spherical coordinates, the differential patch of area on a unit sphere is
+\begin{align}
+  d\Omega = \sin\theta d\theta d\gamma = d\mu d\gamma .
+\end{align}
+Note, $d\mu = -d(\cos\theta)$ where the minus sign arises to keep area a positive quantity.
+
+We can relate the differential solid angle to differential area by
+\begin{align}
+  dA = r^2 d\Omega 
+\end{align}
+with $r^2 = |\mathbf{r}|^2 = x^2 + y^2 + z^2$. If are concerned with the area of a unit sphere then $r^2 = 1$ and $dA$ and $d\Omega$ are the same in magnitude, but have different units: $dA$ has a unit of area and $d\Omega$ has a unit of steradian.
+
+One final bit of notation dealing with integrating over direction. We define for shorthand the integral over all directions as
+\begin{align}
+  \int_{4\pi} f(\dir) d\Omega = \int_0^{2\pi} \int_0^\pi f(\theta,\gamma) \sin\theta d\theta d\gamma = \int_0^{2\pi} \int_{-1}^1 f(\mu,\gamma) d\mu d\gamma .
+\end{align}
+
+
+
+
+%Additionally, to simplify calculations we often homogenize the materials to create an effective mixture. 
+%
+%
+%Depending on what we want to accomplish, mixtures are characterized using either atom, mass, or volume fractions. These are, respectively,
+%\begin{subequations}
+%\begin{align}
+%  a_i &= \frac{N_i}{N} = \frac{ N_i }{ \sum_j N_j }, \\
+%  w_i &= \frac{M_i}{M} = \frac{ M_i }{ \sum_j M_j }, \\
+%  v_i &= \frac{V_i}{V} = \frac{ V_i }{ \sum_j V_j },
+%\end{align}
+%\end{subequations}
+%where $N_i$ is the density of atoms of constituent $i$, $M_i$ is the corresponding mass, and $V_i$ is the volume taken up by constituent $i$. The sums in the denominator of these expressions are taken over all constituents in the mixture.
+
+
+\section{Cross Section}
+
+The fundamental parameter characterizing the interactions of particles with matter is called a cross section, which can be thought of as an effective cross area of a nucleus. These cross sections are the primary constituent of nuclear interaction data needed to characterize the physics of a nuclear reactor.
+
+The concept of the cross section can be understood by a thought experiment. Suppose we can somehow fabricate a slab or target with a thickness of one atom consisting of a single isotope. Next, we create a beam of neutrons and put the target in that beam. In this case, we will make the following observations:
+\begin{enumerate}
+  \item The intensity of the beam is slightly reduced after going through the slab, indicating some of the neutrons have interacted with the nuclei in the target.
+  \item The amount that the intensity of the beam is reduced or attenuated depends on the kinetic energy of the neutrons in the beam. The general trend is the attenuation is greater for lower kinetic energies, but there are some narrow energy ranges where the attenuation is either large or small---the target is either opaque or transparent depending on the neutron kinetic energy.
+  \item Neutrons and other particles (gamma rays, protons, alpha particles) emerge in a distribution of directions outside of the beam at different kinetic energies, indicating that nuclear reactions producing secondary particles are occurring. This distribution of secondary directions also depends on the kinetic energy of the neutrons in the beam, where the general trend is that the distribution is more forward-peaked for higher kinetic energies.
+  \item Different targets consisting of different isotopes have very different attenuation properties.
+\end{enumerate} 
+
+The (differential) probability of a neutron in the beam with area $S$ interacting with a nucleus in the one-atom-thick target with (differential) thickness $dx$ can be thought of as
+\begin{align}
+  dp = \frac{\text{effective area of nuclei ``seen'' by the neutrons in the beam}}{\text{total area of the neutron beam $S$}}. \nonumber
+\end{align}
+Let us define
+\begin{align}
+  \sigma_t(E)
+  &= \text{effective cross-sectional area of an individual nucleus} \nonumber \\
+  &= \text{microscopic total cross section}, \nonumber
+\end{align}
+which depends, per our experiment, on the neutron kinetic energy $E$. Because of the small size of the nucleus, we often describe $\sigma$ in units of barns. Also,
+\begin{align}
+  \text{number of nuclei in the target} = N S dx,
+\end{align}
+where $N$ is the atomic density of the nuclei. The effective area of all the nuclei in the target is the product of the number of nuclei and the effective cross sectional area of each nucleus. Therefore, the differential probability is
+\begin{align}
+  dp = \frac{ ( N S dx ) \sigma_t(E) }{ S } = N \sigma_t(E) dx = \Sigma_t(E) dx.
+\end{align}
+We refer to
+\begin{align}
+  \Sigma_t(E) = N \sigma_t = \text{macroscopic total cross section} \nonumber
+\end{align}
+with units of interactions per unit length and can be thought of as the neutron attenuation coefficient. Until it is relevant again, we are going to drop the functional dependence on $E$ and treat it as implied. This will simplify the following notation, but keep in mind the nuclear cross section always depends on the neutron kinetic energy.
+
+The macroscopic total cross section for a mixture can be defined. Let $N_j$ be the atomic density of the $j$th isotope and $\sigma_t^j$ (here $j$ is a superscript) be the microscopic total cross section for that isotope. The macroscopic total cross section for a mixture is
+\begin{align}
+  \Sigma_t = \sum_j N_j \sigma_t^j ,
+\end{align}
+where the sum is over all isotopes in the mixture.
+
+\subsection{Neutron Attenuation}
+
+Of course, unlike in our thought experiment, actual objects that neutrons will go through are not one-atom thick, but be thought of as a stack of very thin slabs along the direction that neutrons are traveling. The macroscopic cross section can vary with depth within this stack of slabs because materials may vary, so we write this as $\Sigma_t(x)$. Let
+\begin{align}
+  I(x) &= \text{intensity of the beam of neutrons at position $x$}, \nonumber
+\end{align}
+where $I(0) = I_0$ is the initial intensity at $x = 0$. The change in the intensity between $x$ and $x + dx$ is related as
+\begin{align}
+  I(x) - I(x+dx) = 	&\text{ the expected number of neutron} \nonumber \\ 
+  					&\text{ interactions between $x$ and $x + dx$}. \nonumber
+\end{align}
+The beam intensity at $x + dx$ can be related to the beam intensity at $x$ through a first-order Taylor series expansion about $x$,
+\begin{align}
+  I(x+dx) = I(x) + dx \dho{I}{x} . \nonumber
+\end{align}
+Inserting this, we obtain
+\begin{align}
+  I(x) - \left[ I(x) + dx \dho{I}{x} \right] = -\dho{I}{x} dx. \nonumber
+\end{align}
+Next, we divide both sides by $I(x)$,
+\begin{align}
+  -\frac{1}{I(x)} \dho{I}{x} dx &= 
+  \frac{\text{ number of neutron interactions between $x$ and $x + dx$}}{\text{ number of neutrons at $x$}} \nonumber \\
+  &= \text{ probability that a neutron at $x$ with interact between $x$ and $x + dx$} \nonumber \\
+  &= \ dp \nonumber \\
+  &= \ \Sigma_t(x) dx. \nonumber
+\end{align}
+We can then cancel the $dx$ on both sides to obtain the following differential equation,
+\begin{align}
+  \frac{dI}{dx} = -\Sigma_t(x) I(x) , \quad I(0) = I_0 .
+\end{align}
+The solution to this differential equation is then
+\begin{align}
+  I(x) = I_0 \exp\left[ -\int_0^x \Sigma_t(s) ds \right] .
+\end{align}
+For the special case where materials are constant across the stack of slabs, $\Sigma_t(x) = \Sigma_t$, we get the classic exponential attenuation formula:
+\begin{align}
+  I(x) = I_0 e^{-\Sigma_t x} .
+\end{align}
+
+We can also obtain an expression for the probability density function for a neutron traveling a depth $x$ into a material. The chain of reasoning goes as follows:
+\begin{align}
+  p(x) dx = &\text{ probability that a neutron has an interaction between} \nonumber \\ 
+            &\text{ depths $x$ and $x + dx$} \nonumber \\
+          = &\ \frac{\text{number of neutron interactions between depth $x$ and $x + dx$}}{\text{initial number of neutrons at $x = 0$}} \nonumber \\
+          = &\frac{1}{I_0} \left[ -\dho{I}{x} dx \right] \nonumber \\
+          = &\frac{1}{I_0} \left[ \Sigma_t(x) I_0 \exp\left( -\int_0^x \Sigma_t(s) ds \right) dx \right] \nonumber \\
+          = &\Sigma_t(x) \exp\left( -\int_0^x \Sigma_t(s) ds \right) dx.
+\end{align}
+For the special case of uniform material properties, $\Sigma_t(x) = \Sigma_t$, and we get the result that the distance between neutron collisions is exponentially distributed with parameter $\Sigma_t$:
+\begin{align}
+  p(x) dx = \Sigma_t e^{-\Sigma_t x} dx .
+\end{align}
+For this case, we can find the expected distance neutron travels or the \emph{mean free path} as
+\begin{align}
+  \overline{x} = \int_{-\infty}^\infty x p(x) dx = \int_0^\infty \Sigma_t e^{-\Sigma_t x} dx = \frac{1}{\Sigma_t} .
+\end{align}
+This result is basically the same as we had for the mean time to radioactive decay.
+
+\subsection{Reaction Probabilities}
+
+Returning to the observations in our hypothetical experiment, the neutrons undergo different neutron interactions with various frequencies. Let $r$ denote the type of interaction with microscopic reaction cross section $\sigma_r^j$. The microscopic total cross section for isotope $j$ is the sum of the microscopic cross sections for each different interaction,
+\begin{align}
+  \sigma_t^j = \sum_r \sigma_r^j .
+\end{align}
+Each reaction has its own effective area that can be thought of as a contributor of the total effective area. The macroscopic total cross section for a particular reaction is
+\begin{align}
+  \Sigma_r^j = N^j \sigma_r^j .
+\end{align}
+
+From these definitions, we can deduce the probabilities of a particular reaction with a particular isotope occurring within a nuclear interaction. The probability that a neutron interactions with a nucleus of type $j$ and having any type of nuclear reaction is
+\begin{align}
+  p_{t,j} = \frac{ \Sigma_t^j }{ \Sigma_t } .
+\end{align}
+Likewise, the probability of a particular reaction with a specific isotope within a mixture is
+\begin{align}
+  p_{r,j} = \frac{ \Sigma_r^j }{ \Sigma_t } .
+\end{align}
+Finally, the probability of a type of reaction $r$ occurring in isotope $j$, given that a reaction has occurred within isotope $j$ already is the ratio of the microscopic cross sections:
+\begin{align}
+  p_{r|j} = \frac{\sigma_r^j}{\sigma_t^j}.
+\end{align}
+
+\subsection{Differential Cross Section}
+
+Continuing on trying to describe the results of our experiment, some of the secondaries emerged from the target with different directions and kinetic energies. The intensity of scattering in a particular direction can be characterized using the \emph{differential cross section} for reaction type $r$. (Here we take reaction $r$ being one such that one neutron enters and one particle emerges.) This is defined using the differential solid angle as follows:
+\begin{align}
+  N \left( \frac{d\sigma_r}{d\Omega} \right) dx d\Omega
+  = &\text{ the probability that a neutron interacts between $x$ and $x + dx$ and } \nonumber \\
+    &\text{ emerges in some patch of solid angle $d\Omega$ about direction $\dir$. } \nonumber
+\end{align}
+To be explicit, we refer to
+\begin{align}
+  \frac{d\sigma_r}{d\Omega} = \text{ differential (microscopic) cross section for reaction $r$.} \nonumber
+\end{align}
+
+We usually can assume that the differential cross section only varies in the polar angle $\theta$ and is uniform in the azimuthal angle $\gamma$. The reasons for this will become more apparent when we delve into the quantum theory of scattering. (This result arises because the nucleus is essentially spherical.)  From this, we can deduce that the reaction is only random in the change in direction. If $\dir'$ is the incident neutron direction and $\dir$ is the outgoing particle direction, then from the dot product we have
+\begin{align}
+  \dir' \cdot \dir = \cos\theta_0 = \mu_0. 
+\end{align}
+Here we define $\theta_0$ as the (polar) scattering angle. We can decompose the differential cross section as the product of the cross section $\sigma_r$ and a probability density function for scattering in a particular direction or direction change, 
+\begin{align}
+  \frac{d\sigma_r}{d\Omega} = \sigma_r p(\dir' \cdot \dir) = \sigma_r \frac{p(\mu_0)}{2\pi} . 
+\end{align}
+Here the $1/2\pi$ is from the azimuthal symmetry. Then,
+\begin{align}
+  \int_{4\pi} p(\dir' \cdot \dir) d\Omega 
+  = \frac{1}{2\pi} \int_0^{2\pi} \int_{-1}^1 p(\mu_0) d\mu_0 d\gamma_0 
+  = \int_{-1}^1 p(\mu_0) d\mu_0
+  = 1,
+\end{align}
+which says that a particle undergoing reaction $r$ emerges in some direction, per our previous assumption. It follows then that if the differential cross section is known, then the cross section can be calculated by integrating over all directions,
+\begin{align}
+  \sigma_r = \int_{4\pi} \left( \frac{d\sigma_r}{d\Omega} \right) d\Omega .
+\end{align}
+
+We often describe the differential cross section compactly using the Legendre polynomials. Because the differential cross section depends only on the scattering angle, or $\cos\theta_0$, which ranges from $[-1,1]$, we can perform a Legendre polynomial expansion:
+\begin{align}
+   \frac{d\sigma_r}{d\Omega} = \frac{1}{2\pi} \sum_{\ell = 0}^\infty \frac{ 2\ell + 1 }{2} \sigma_{r\ell} P_\ell(\cos\theta_0) .
+\end{align}
+Here $\sigma_{r\ell}$ is called the $\ell$th Legendre polynomial of the differential cross section for reaction $r$. As before, the factor of $1/2\pi$ arises because of the azimuthal coordinate and its assumed uniformity. Usually we only need a few Legendre moments $\sigma_{r\ell}$ to characterize the differential cross section, so this is a very compact way of describing it. Furthermore, when we get into developing equations for modeling the transport of neutrons, we will apply analogous expansions to the directionality of the neutron field and these Legendre moments will naturally and conveniently arise as part of the system of equations.
+
+At the beginning of this section, we brought up kinetic energy in addition to direction, but completely ignored the former. In many cases, like elastic scattering, there is a one-to-one correspondence between the changes in direction and energy because energy and momentum must be simultaneously conserved. In some types of inelastic reactions, this one-to-one relationship breaks down---we still conserve energy and momentum, but these quantities go elsewhere and are not fully characterized by the differential cross section alone. To describe the change in direction and energy together, we introduce the \emph{double-differential cross section}:
+\begin{align}
+  N \left( \frac{\partial^2 \sigma_r}{\partial \Omega \partial E} \right) dx d\Omega dE
+  = &\text{ the probability that a neutron interacts between  } \nonumber \\
+    &\text{ $x$ and $x + dx$ and emerges in some patch of } \nonumber \\
+    &\text{ solid angle $d\Omega$ about direction $\dir$  } \nonumber \\
+    &\text{ having some kinetic energy within $E$ and $E + dE$.} \nonumber
+\end{align}
+Admittedly, that is a bit of a mouthful. Like with the (single-) differential cross section, the double-differential cross section can be expanded into a product of a cross section and a probability density function
+\begin{align}
+  \frac{\partial^2 \sigma_r}{\partial \Omega \partial E} = \sigma_r p( \dir' \cdot \dir, E' \rightarrow E )
+\end{align}
+where $\dir$ is the (random) outgoing direction of the emerging particle, $E$ is the (random) outgoing kinetic energy of the emerging particle, and $E'$ is the (given) incident energy of the incident neutron. The probability density satisfies
+\begin{align}
+  \int_0^\infty \int_{4\pi} p( \dir' \cdot \dir, E' \rightarrow E ) d\Omega dE = 1,
+\end{align} 
+meaning that the emergent particle comes out with some direction and kinetic energy. We can also just integrate this over the directions to get the probability density for energy transfer
+\begin{align}
+   \int_{4\pi} p( \dir' \cdot \dir, E' \rightarrow E ) d\Omega = p(E' \rightarrow E) .
+\end{align}
+Here we define this probability density as
+\begin{align}
+  p(E' \rightarrow E) dE = 
+  &\text{ probability that a neutron with an incident kinetic energy $E'$} \nonumber \\
+  &\text{ produces an outgoing particle with a kinetic energy between} \nonumber \\
+  &\text{ $E$ and $E + dE$.} \nonumber
+\end{align}
+It follows we can define the differential energy transfer cross section as
+\begin{align}
+  \frac{d\sigma_r}{dE} = \sigma_r p(E' \rightarrow E) .
+\end{align}
+
+Before leaving this topic, there is a bit of notation to introduce. We often write the double-differential cross section as
+\begin{align}
+  \frac{\partial^2 \sigma_r}{\partial \Omega \partial E} = \sigma_r( \dir' \cdot \dir, E' \rightarrow E ) .
+\end{align}
+We can also expand the double-differential scattering in Legendre polynomials as
+\begin{align}
+  \frac{\partial^2 \sigma_r}{\partial \Omega \partial E} = \frac{1}{2\pi} \sum_{\ell = 0}^\infty \frac{ 2\ell + 1 }{2} \sigma_{r\ell}( E' \rightarrow E ) P_\ell(\cos\theta_0)
+\end{align}
+Here $\sigma_{r\ell}(E' \rightarrow E)$ is the $\ell$th Legendre moment of the energy transfer cross section. We can show that for $\ell = 0$, we get the differential energy transfer cross section
+\begin{align}
+  \sigma_{r0}(E' \rightarrow E) = \sigma_{r}(E' \rightarrow E),
+\end{align}
+and, by extension $\sigma_{r0} = \sigma_r$.
+
+\section{Quantum Scattering Theory}
+
+In our previous discussion, we were admittedly a bit cagey about defining the microscopic cross section, using the word ``effective'' hiding a lot of the underlying physics. We did this because, well, we need a quite a bit of quantum mechanics to really understand what this means. Since these details are not normally relevant for most day-to-day nuclear engineering, we will keep our discussion to a high level and direct readers to texts on quantum mechanics for a more thorough discussion. This section will provide a brief discussion of quantum scattering theory that explains where the cross section comes from. 
+
+If classical physics governed our universe at the atomic level, we could think of nuclei as a (nearly) spherical cloud of spherical nucleons with well defined cross sectional areas and the neutrons interacting with this object. Of course, we all know that at the tiny scale that quantum mechanical descriptions are necessary and matter exhibits wavelike properties. This behavior is described by a complex-valued function $\psi$ called the \emph{wavefunction}. This wavefunction is the solution to a wave equation called the Schr\"{o}dinger equation and satisfies the property that the product of itself with its complex conjugate is a probability density:
+\begin{align}
+  | \psi |^2 dV = &\psi \psi^* dV \nonumber \\
+  = &\text{ probability that a particle is measured in some differential volume $dV$} \nonumber \\
+    &\text{ centered about spatial coordinate $\pos = (x,y,z)$.} \nonumber
+\end{align}
+
+For the purposes of this discussion, we assume our problem is time-independent and return to our thought experiment of a steady beam of particles oriented along the $z$-axis that is incident upon a one-atom thick slab of nuclei. To simplify the discussion, we will consider the case where all neutrons scatter, where none are absorbed in the nucleus and denote the microscopic cross section $\sigma_t = \sigma$ without reaction subscripts. In this case, each neutron that enters the slab must be balanced by another neutron exiting. Now, the differential volume element that the neutrons encounter is $dV = d\sigma dz$, where $\sigma$ here is our effective cross sectional area from before. The differential probability of particles traversing this differential volume is then
+\begin{align}
+  dp = &\text{ probability that a particle passes through a differential volume} \nonumber \\
+     = &\ | \psi_{inc} |^2 dV \nonumber \\
+     = &\ | \psi_{inc} |^2 d\sigma dz.
+\end{align}
+The particles emerge with some wavefunction $\psi_{out}$ with a distribution of directions $\dir$. We can then relate the differential volume element $dV$ to the solid angle using $dV = r^2 d\Omega dz$. Because of the conservation of particles we can write
+\begin{align}
+  dp = &\text{ probability that a particle passes through a differential volume} \nonumber \\
+     = &\text{ probability that a particle exits the differential volume} \nonumber \\
+     = &\ | \psi_{out} |^2 dV  \nonumber \\
+     = &\ | \psi_{out} |^2 r^2 d\Omega dz.
+\end{align}
+Therefore, the differential cross section is
+\begin{align} \label{Eq:nuclearData_DifferentialXS_RatioWavefunctions}
+  \frac{d\sigma}{d\Omega} = r^2 \frac{ | \psi_{out} |^2 }{ | \psi_{inc} |^2 } .
+\end{align}
+Therefore, our task falls to solving Schr\"{o}dinger's equation to obtain the wavefunctions, which we tackle next.
+
+
+
+%\begin{align}
+%  dp = &\text{ probability that a particle passes through a differential volume} \nonumber \\
+%     = &\ | \psi_{inc} |^2 dV \nonumber \\
+%     = &\ | A |^2 dz d\sigma .
+%\end{align}
+%In scattering, each particle that goes in has to be balanced by a particle that comes out. To get here, let us investigate our outgoing wavefunction from Eq.~\eqref{Eq:nuclearData_outgoingWavefunction}, but take it for large $r$ with $h_0(kr) = e^{ikr}/r$ and all other terms becoming negligible. This can be written as
+%\begin{align}
+%  \psi_{out}(r,\theta) = A f(\theta) \frac{ e^{ikr} }{r }, \quad r \gg 0.
+%\end{align}
+%We refer to $f(\theta)$ as the \emph{scattering amplitude}, which gives the direction of particle emergence from scattering. We characterize different directions with a solid angle $d\Omega = \sin\theta d\theta d\varphi$ such that the differential volume is $dV = dz \cdot r^2 d\Omega$. Going back to the conservation of particles,
+%\begin{align}
+%  dp = &\text{ probability that a particle passes through a differential volume} \nonumber \\
+%     = &\text{ probability that a particle exits the differential volume} \nonumber \\
+%     = &\ | \psi_{out} |^2 dV  \nonumber \\
+%     = &\ \frac{|A|^2 |f(\theta)|^2}{r^2} ( dz ) r^2 d\Omega .
+%\end{align}
+%We therefore have
+%\begin{align}
+%  dp = | A |^2 dz d\sigma = \frac{|A|^2 |f(\theta)|^2}{r^2} ( dz ) r^2 d\Omega . 
+%\end{align}
+%This means that
+%\begin{align}
+%  \frac{d\sigma}{d\Omega} = | f(\theta) |^2 .
+%\end{align}
+%This quantity $d\sigma/d\Omega$ is called the \emph{differential (microscopic) scattering cross section}. Multiplying by the atomic density, this is the probability per unit length per unit solid angle that a neutron scatters in some a direction. The microscopic cross section then can be obtained by integrating over all solid angle:
+%\begin{align}
+%  \sigma = \int_{4\pi} \frac{d\sigma}{d\Omega} d\Omega = 2\pi \int_0^\pi | f(\theta) |^2 \sin\theta d\theta .
+%\end{align}
+
+
+
+
+\subsection{Partial Wave Analysis}
+
+The incoming wavefunction can be visualized as an incident plane wave moving toward a nearly spherical nucleus. This incident wavefunction is most convenient to describe using a complex exponential:
+\begin{align} \label{Eq:nuclearData_incidentWavefunction_SimpleForm}
+  \psi_{inc}(\pos) = A e^{ikz},
+\end{align}
+where $A$ is some constant proportional to the intensity of the particle beam and the wave number is
+\begin{align}
+  k = \frac{\sqrt{2mE}}{\hbar} .
+\end{align}
+We orient the coordinate system such that the neutron moves along the $z$ axis. This choice is motivated because we will need to use spherical coordinates to describe the scattering process and we can use $z$ as the polar axis for that coordinate system. (We could of course pick whatever polar axis we want and still get the same results, but the math gets much more tedious.) 
+
+When the neutron's wavefunction strikes the nucleus, it spreads out in some manner. A useful picture is to imagine the nucleus as a rock sticking out in a body of water and the neutron wavefunction as a wave produced by a faraway object hitting the rock and spreading out. The difference here is that the neutron's wavefunction is a probability ``wave'' where the amplitude squared describes the likelihood of the neutron being at a particular location. A ``measurement'' of the outgoing wave function resolves the direction the neutron scatters off the nucleus.
+
+The total wavefunction $\psi$ (incident plus scattered) is described by the time-independent Schr\"{o}dinger's equation,
+\begin{align}
+  \left[ -\frac{\hbar^2}{2m} \nabla^2 + V(\pos) \right] \psi(\pos) = E \psi(\pos) .
+\end{align}
+Here we take $\nabla^2$ to be in spherical coordinates $\pos = (r,\theta,\varphi)$. We then assume that the potential $V(r,\theta,\varphi) = V(r)$, only carrying radial dependence. This is based on the assumption of a spherical nucleus. Based on the fact that the potential only depends on the radial coordinate, we also assert that there is no azimuthal or $\varphi$ dependence on the solution. We finally make another assumption that the potential $V(r)$ is localized, in other words $V(r) \approx 0$, for some $r > a$. This is a very good model for neutrons interacting with nuclei, where the interaction is caused by the short-range strong nuclear force. This allows us to more easily explore solutions to the Schr\"{o}dinger equation outside the nucleus. This is perfectly fine, since we only care about the neutrons after they have traveled away from the nucleus anyway.
+
+
+This is now
+\begin{align}
+  \frac{1}{r^2} \dho{}{r} \left( r^2 \dho{\psi}{r} \right) + \frac{1}{r^2 \sin\theta } \dho{}{\theta} \left( \sin\theta \dho{\psi}{\theta} \right) = -k^2 \psi(r,\theta) .
+\end{align}
+We can use separation of variables and suppose a solution of the form $R(r) \Theta(\theta)$. After inserting this form into the differential equation and going through a bit of algebra, we obtain a solution of the form
+\begin{align}
+  \psi(r,\theta) = R(r) P_\ell(\cos\theta).
+\end{align}
+Here $R(r)$ is a function that depends only upon the radial coordinate. We define $u(r) = r R(r)$, which satisfies the ordinary differential equation
+\begin{align} \label{Eq:nuclearData_schrodingerRadial}
+  \frac{d^2 u}{dr^2} - \frac{\ell(\ell+1)}{r^2} u(r) = -k^2 u(r) .
+\end{align}
+The constant $\ell(\ell+1)$ arose from the separation of variable process where the solution for the differential equation in $\Theta(\theta)$ only exists when it is equal to a constant of the form $\ell(\ell+1)$ with $\ell = 0, 1, 2, \ldots$ Here $P_\ell(\cos\theta)$ is the Legendre polynomial. Note that this is a single solution that satisfies the equation, having an index of $\ell$ on the Legendre polynomial. The general solution is a linear combination of all possible solutions or orders $\ell$ of the Legendre polynomial.
+
+\subsection{Wavefunction Far from the Nucleus}
+
+Given the size of the nucleus is very small relative to the length scales of interest, we may be motivated to solve for the radial equation $u(r)$ for very large $r$. In this case, the $1/r^2$ term in the denominator becomes negligible and we have
+\begin{align}
+  \frac{d^2u}{dr^2} \approx -k^2 u(r), \quad r \rightarrow \infty,
+\end{align}
+which has the solution
+\begin{align}
+  u(r) \sim A e^{ikr} + B e^{-ikr} , \quad r \rightarrow \infty.
+\end{align}
+The first (positive exponential) term describes a radial outgoing wave and the second (negative exponential) term is that of a radial incoming wave. Since we are only interested in solutions of neutrons moving away the nucleus, we take the first term and set $B = 0$. Therefore, the radial wavefunction for the scattered wave far from the nucleus behaves as
+\begin{align}
+  R(r) \sim \frac{ e^{ikr} }{ r }, \quad r \rightarrow \infty
+\end{align}
+While this result gives us insight into how the radial part of the wavefunction should behave far from the nucleus, it does give us any information about the $\theta$ dependence. However, based on our analysis, we can assert that far from the nucleus, the total wave function must be an incident plane wave plus an outgoing radial wave times some to-be-determined function of $\theta$:
+\begin{align} \label{Eq:nuclearData_wavefunctionAsymptoticForm}
+  \psi(r,\theta) \sim A \left[ e^{ikz} + f(\theta) \frac{ e^{ikr} }{ r } \right] .
+\end{align}
+
+%Returning to Eq.~\eqref{Eq:nuclearData_schrodingerRadial}, we need to find solutions. To begin, let us consider the case for large $r$, which is motived because we are again most interested in neutrons very far from the nucleus. The equation becomes
+%\begin{align}
+%  \frac{d^2u}{dr^2} \approx -k^2 u(r), \quad r \gg 0,
+%\end{align}
+%which has the solution
+%\begin{align}
+%  u(r) = A_1 e^{ikr} + A_2 e^{-ikr} , \quad r \gg 0.
+%\end{align}
+%The first (positive exponential) term describes an outgoing wave and the second (negative exponential) term is that of an incoming wave. Since we are interested in what leaves the nucleus, we take the first term and set $A_2 = 0$.
+%
+%This analysis describes the asymptotic behavior for very large $r$. Unfortunately, we do need to consider regions outside, but close to the nucleus to fully describe the scattering process. 
+
+\subsection{Wavefunction Near the Nucleus}
+
+To determine $f(\theta)$ we need to solve \eqref{Eq:nuclearData_schrodingerRadial} for $r$ near the nucleus where the $1/r^2$ term must be kept. Sadly, none of the standard functions satisfy the differential equation, and we need to assume $u(r)$ is described by a power series expansion. After plugging in the power series and going through a lot of tedious algebra, we can deduce a solution of the form
+\begin{align} \label{Eq:nuclearData_schrodingerTransformedRadialSolution}
+  u(r) = A_\ell r j_\ell(kr) + B_\ell r \eta_\ell(kr) ,
+\end{align}
+where $j_\ell$ and $\eta_\ell$ are called the spherical Bessel function and the spherical Neumann function, respectively. (Note that this is the physicist nomenclature for these functions. Mathematicians more commonly refer to $j_\ell(x)$ as the spherical Bessel function of the first kind and $\eta_\ell(x)$ as the spherical Bessel function of the second kind with the symbol $y_\ell(x)$.) These have the following power series representations that popped out of the algebra that we skipped:
+\begin{subequations} \label{Eq:nuclearData_sphericalBesselSeriesExpansions}
+\begin{align} 
+  j_\ell(x) 	&= ( 2 x )^\ell \sum_{n=0}^\infty \frac{(-1)^n}{n!} \frac{(n + \ell)!}{(2n + 2\ell + 1)!} x^{2n} , \\*
+  \eta_\ell(x) 	&= \frac{ (-1)^{\ell+1}}{ 2^\ell x^{\ell+1} } \sum_{n=0}^\infty \frac{(-1)^n}{n!} \frac{(n - \ell)!}{(2n - 2\ell)!} x^{2n} .
+\end{align}
+\end{subequations}
+A key point with these expansions is that for $x = 0$, the spherical Bessel function $j_\ell$ is finite, whereas $\eta_\ell$ diverges. If we center our coordinate system about the nucleus and restrict our analysis to outside the nucleus, then we can keep both terms. (We would need to discard the $\eta_\ell$ terms within the interior of the nucleus to ensure the wavefunction stays finite.) 
+
+Let's pause and get a few properties of these special functions. For the special case of $\ell = 0$, we can express the spherical Bessel and Neumann functions in a nice form
+\begin{subequations} \label{Eq:nuclearData_sphericalBesselZerothOrder}
+\begin{align} 
+  j_0(x) 	&=  \frac{\sin(x)}{x} , \\*
+  \eta_0(x) &= -\frac{\cos(x)}{x}.
+\end{align}
+\end{subequations}
+Since we are most interested in the particle behavior far from the nucleus, which motivates finding a form of the spherical Bessel and Neumann functions with large argument. These asymptotic forms are
+\begin{subequations} \label{Eq:nuclearData_sphericalBesselAsymptotic}
+\begin{align} 
+  j_\ell(x) 	&\sim  \frac{\sin(x - \ell \pi/2)}{x} , \\*
+  \eta_\ell(x) 	&\sim -\frac{\cos(x - \ell \pi/2)}{x} , \quad x \rightarrow \infty.
+\end{align}
+\end{subequations}
+
+Taking the resulting from of $u(r)$, we can divide by $r$ to obtain a solution to the radial Schr\"{o}dinger equation. However, any value of $\ell \ge 0$ is a solution, so we need to take the linear combination of them. We can write the solution for the total wavefunction
+\begin{align} \label{Eq:nuclearData_totalWavefunctionSphericalBessel}
+  \psi(r,\theta) = \sum_{\ell = 0}^\infty \left[ A_\ell j_\ell(kr) + B_\ell \eta_\ell(kr) \right] P_\ell(\cos\theta) .
+\end{align}
+Again, we must keep the $\eta_\ell$ terms because our analysis is strictly outside the nucleus $r > a$ and does not include the origin. 
+
+\subsection{Partial Wave Phase Shifts}
+
+Let's take this solution and move away from the nucleus. We should be able to establish a consistency between our earlier analysis by correcting choosing coefficients. As $r$ gets large, the asymptotic forms in Eq.~\eqref{Eq:nuclearData_sphericalBesselAsymptotic} become valid. These give the following result for the total wavefunction
+\begin{align}
+  \psi(r,\theta) \sim \sum_{\ell = 0}^\infty \left[ A_\ell \frac{\sin(kr - \ell \pi/2)}{kr} - B_\ell \frac{\cos(kr - \ell \pi/2)}{kr} \right] P_\ell(\cos\theta) , \quad r \rightarrow \infty .
+\end{align}
+This expression as it stands would be difficult to match with our asymptotic result. For reasons that will become apparent, we rewrite this to be as a single trigonometric function with a phase shift $\delta_\ell$ and amplitude $C_\ell$ as opposed to a sum of a sine and cosine function with two separate coefficients. We can do this by using a trigonometric identity for the sine of the sum:
+\begin{align}
+  \sin(x + y) = \cos(x) \sin(y) + \sin(x) \cos(y) . \nonumber
+\end{align}
+Applied to this specific case,
+\begin{align}
+  C_\ell \sin(kr - \ell \pi/2 + \delta_\ell) = 
+  C_\ell \cos(\delta_\ell) \sin( kr - \ell \pi/2 ) + C_\ell \sin(\delta_\ell) \cos( kr - \ell \pi/2 ) .
+\end{align}
+We define the constants 
+\begin{subequations} \label{Eq:nuclearData_radialSchrodingerConstantRedefinition}
+\begin{align}
+  A_\ell = C_\ell \cos(\delta_\ell),
+  B_\ell = C_\ell \sin(\delta_\ell)
+\end{align}
+\end{subequations}
+to obtain
+\begin{align}
+  \psi(r,\theta) \sim A \sum_{\ell = 0}^\infty C_\ell \frac{\sin(kr - \ell \pi/2 + \delta_\ell)}{kr}  P_\ell(\cos\theta) , \quad r \rightarrow \infty .
+\end{align}
+Here we pulled out a factor of $A$, the amplitude of the incident wavefunction for convenience later. Since it is easier to work with complex exponentials, let's apply a result from Euler's formula for the sine,
+\begin{align}
+  \sin x = \frac{ e^{ix} - e^{-ix} }{ 2 i } . \nonumber
+\end{align}
+Therefore, in complex exponential form, the total wavefunction for large $r$ is
+\begin{align} \label{Eq:nuclearData_totalWavefunctionComplexExponentials}
+  \psi(r,\theta) \sim A \sum_{\ell = 0}^\infty C_\ell \frac{e^{i(kr - \ell \pi/2 + \delta_\ell)} - e^{-i(kr - \ell \pi/2 + \delta_\ell)} }{2ikr}  P_\ell(\cos\theta) , \quad r \rightarrow \infty .
+\end{align}
+
+%The radial function $u(r)$ far from the nucleus can therefore be approximated as
+%\begin{align}
+%  u(r) \sim  A_\ell \sin(kr - \ell \pi/2) - B_\ell \cos(x - \ell \pi/2) , \quad r \rightarrow \infty .
+%\end{align}
+
+This is a general form for the total wavefunction, but to find our differential cross section from Eq.~\eqref{Eq:nuclearData_DifferentialXS_RatioWavefunctions} needs the incident and outgoing wavefunctions. We have the total wavefunction $\psi$ and the incident $\psi_{inc}$, so we could simply take the difference to get $\psi_{out}$; however, $\psi_{inc}$ is still terms of $e^{ikz}$ and not in a nice form that we can easily work with. Thankfully, there is an identity that we can derive by expanding $z = r\cos\theta$ in spherical Bessel functions in $r$ and Legendre polynomials in $\theta$. This is
+\begin{align}
+  \psi_{inc} = A e^{ikz} = A \sum_{\ell=0}^\infty i^\ell ( 2 \ell + 1 ) j_\ell(kr) P_\ell(\cos \theta) .
+\end{align}
+Taking this for large $r$ far from the nucleus, we have the incident wavefunction tending toward
+\begin{align}
+  \psi_{inc} \sim A \sum_{\ell=0}^\infty i^\ell ( 2 \ell + 1 ) \frac{ \sin(kr - \ell \pi/2 ) }{ kr } P_\ell(\cos \theta) , \quad r \rightarrow \infty .
+\end{align}
+Expanding the sine in terms of complex exponentials, the incident planar wave becomes
+\begin{align} \label{Eq:nuclearData_incidentWavefunctionComplexExponentials}
+  \psi_{inc} \sim A \sum_{\ell=0}^\infty i^\ell ( 2 \ell + 1 )  \frac{e^{i(kr - \ell \pi/2 )} - e^{-i(kr - \ell \pi/2 )} }{2ikr} P_\ell(\cos \theta) , \quad r \rightarrow \infty .
+\end{align}
+
+Right now we have a bit of a mess of terms. However, as we said earlier, we did some earlier analysis about what the behavior of the wavefunction must be for large $r$ with the result being in Eq.~\eqref{Eq:nuclearData_wavefunctionAsymptoticForm}. The difference between the total wave function and the incident wave function is the outgoing wavefunction, which goes as
+\begin{align} \label{Eq:nuclearData_outgiongWavefunctionAsymptoticForm}
+  \psi_{out}(r,\theta) \sim f(\theta) \frac{e^{ikr}}{r}, \quad r \rightarrow \infty .
+\end{align}
+We should get an equivalent result by subtracting Eq.~\eqref{Eq:nuclearData_incidentWavefunctionComplexExponentials} from~\eqref{Eq:nuclearData_totalWavefunctionComplexExponentials}. For these results to be consistent, we need to choose $C_\ell$ so that the $e^{-ikr}$ terms vanish. Equating these terms, we see that
+\begin{align} \label{Eq:nuclearData_wavefunctionPartialWaveCoefficients}
+  C_\ell = A i^\ell (2 \ell + 1 ) e^{i\delta_\ell} .
+\end{align}
+Next, plugging this in and equating the $e^{ikr}$ terms leads us to conclude
+\begin{align} \label{nuclearData_partialWaveAmplitude_Step1}
+  f(\theta) = \sum_{\ell=0}^\infty i^\ell ( 2\ell + 1 ) e^{-i\ell\pi/2} \left[ \frac{ e^{2i\delta_\ell} - 1 }{ 2i k } \right] P_\ell(\cos\theta).
+\end{align}
+We can clean this up a bit. First,
+\begin{align}
+  i^\ell = e^{i\ell\pi/2}, \nonumber
+\end{align}
+so we can easily eliminate those terms. Next, we observe that
+\begin{align}
+  \frac{ e^{2i\delta_\ell} - 1 }{ 2i } = e^{i\delta_\ell} \frac{ e^{i\delta_\ell} - e^{-i\delta_\ell} }{ 2i } = e^{i\delta_\ell} \sin\delta_\ell . \nonumber
+\end{align}
+Therefore, we arrive at the function
+\begin{align} \label{nuclearData_partialWaveAmplitude}
+  f(\theta) = \frac{1}{k} \sum_{\ell = 0}^\infty ( 2\ell + 1 ) e^{i\delta_\ell} \sin\delta_\ell P_\ell(\cos\theta) .
+\end{align}
+We refer to this $f(\theta)$ as the \emph{scattering amplitude} that depends on the phase shifts $\delta_\ell$.
+
+Before going on, it would be useful to delve more into the notion of the phase shift by considering how the presence of the nucleus influences the neutron wavefunction. If there is no nucleus, then the incident wavefunction is unaffected and it is described by the incidenct wavefunction solution. If we have a nucleus, then the wavefunction is described by the solution from the total wavefunction. We can rewrite Eq.~\eqref{Eq:nuclearData_incidentWavefunctionComplexExponentials} using $i^\ell = e^{i\ell \pi/2}$ as
+\begin{align} 
+  \psi_{inc} \sim A \sum_{\ell=0}^\infty ( 2 \ell + 1 )  \frac{ e^{ikr} + (-1)^{\ell+1} e^{-ikr} }{2ikr} P_\ell(\cos \theta) , \quad r \rightarrow \infty .
+\end{align}
+Similarly, we can similarly rewrite the total wavefunction in Eq.~\eqref{Eq:nuclearData_totalWavefunctionComplexExponentials} with the determined value of $C_\ell$ from Eq.~\eqref{Eq:nuclearData_wavefunctionPartialWaveCoefficients} as
+\begin{align} 
+  \psi \sim A \sum_{\ell=0}^\infty ( 2 \ell + 1 )  \frac{ e^{2i\delta_\ell} e^{ikr} + (-1)^{\ell+1} e^{-ikr} }{2ikr} P_\ell(\cos \theta) , \quad r \rightarrow \infty .
+\end{align}
+By comparing these two relationships, we see that the only difference is a factor of $e^{2i\delta_\ell}$ on the outgoing wave component. In other words, the presence of the nucleus shifts the outgoing wave function by an amount of $2i\delta_\ell$ in complex-exponential space.
+
+This factor of $e^{2i\delta_\ell}$ has a special name called the $S$-matrix (diagonal) elements, i.e.,
+\begin{align} \label{Eq:nuclearData:nuclearData_SmatrixDefinition}
+  S_\ell = e^{2i\delta_\ell} .
+\end{align}
+This factor appears in the term in brackets for the scattering amplitude $f(\theta)$ is Eq.~\eqref{nuclearData_partialWaveAmplitude_Step1}. This term in brackets is commonly defined as
+\begin{align} \label{Eq:nuclearData:nuclearData_fl_Smatrix}
+  f_\ell(k) = \frac{ e^{2i\delta_\ell} - 1 }{ 2i k } = e^{i\delta_\ell}\frac{\sin\delta_\ell}{k}.
+\end{align}
+The $S$-matrix is then related to this by
+\begin{align} \label{Eq:nuclearData_Smatrix_fl}
+  S_\ell = 1 + 2 i k f_\ell(k) .
+\end{align}
+The scattering amplitude can then be written in terms of the $f_\ell(k)$ as
+\begin{align} \label{nuclearData_partialWaveAmplitude}
+  f(\theta) = \sum_{\ell = 0}^\infty ( 2\ell + 1 ) f_\ell(k) P_\ell(\cos\theta) .
+\end{align}
+The $S$-matrix or scattering matrix is a powerful tool that, in a more general context, describes the transitions between states within a system. For instance, it is used for predicting the emission of neutrons in nuclear reactions including inelastic scattering and fission. 
+
+\subsection{Determining the Cross Section}
+
+Now we go all the way back to Eq.~\eqref{Eq:nuclearData_DifferentialXS_RatioWavefunctions} for the differential scattering cross section. Plugging in Eqs.~\eqref{Eq:nuclearData_incidentWavefunction_SimpleForm} and~\eqref{Eq:nuclearData_outgiongWavefunctionAsymptoticForm}, we have
+\begin{align} 
+  \frac{d\sigma}{d\Omega} = r^2 \frac{ | \psi_{out} |^2 }{ | \psi_{inc} |^2 } = r^2 \left[ \frac{ |A|^2 |f|^2 }{ r^2 } \right] \left[ \frac{1}{|A|^2} \right] = | f(\theta) |^2 .
+\end{align}
+This means that the differential cross section is the product of the scattering amplitude and its complex conjugate.
+
+To obtain the cross section itself, we need to integrate this over all solid angle. Expanding this out gives
+\begin{align}
+  \sigma = \frac{1}{k^2} \int_0^{2\pi} \int_0^\pi \sum_{\ell = 0}^\infty \sum_{m = 0}^\infty &( 2 \ell + 1 ) ( 2 m + 1 ) e^{i(\delta_\ell - \delta_m)} \nonumber \\* &\times \sin\delta_\ell \sin\delta_m P_\ell(\cos\theta) P_m(\cos\theta) \sin\theta d\theta d\gamma .
+\end{align}
+This integral over a double sum looks particularly heinous. But, it actually is not that bad because of the orthogonality property of the Legendre polynomials. All terms except where $\ell = m$ vanish. The end result is then
+\begin{align} \label{Eq:nuclearData_crossSection_PhaseShift}
+  \sigma = \frac{4\pi}{k^2} \sum_{\ell=0}^\infty ( 2 \ell + 1 ) \sin^2 \delta_\ell = 4\pi \sum_{\ell=0}^\infty ( 2 \ell + 1 ) | f_\ell(k) |^2  .
+\end{align}
+
+\subsection{Computation of Phase Shifts}
+
+This implies to find the differential and integrated cross sections, our task is to find the phase shifts. Finding them involves solving the Schr\"{o}dinger equation within the nucleus itself, for $r < a$ where $V(r) \ne 0$ and matching the solution to the wavefunction at the exterior from Eq.~\eqref{Eq:nuclearData_totalWavefunctionSphericalBessel} at $r = a$. This calculation of the wavefunction in the interior of the nucleus is quite difficult because $V(r)$ is not a simple form and must normally be done using numerical integration. 
+
+This said, if we do solve for the wave function in the nucleus, we can then get a convenient result that lets us find the phase shift. At $r = a$ both the wavefunction, or more precisely, the radial part of the wavefunction, and its derivative with respect to $r$ must be continuous. More precisely, this must be true of each solution for every $\ell$ individually. Therefore, the ratio of the derivative to the wavefunction solution $\ell$ must also be continuous at $r = a$. The nice thing about taking the ratio is the leading coefficients cancel out, leaving us with just the phase shift.
+
+Let's investigate the solution outside the nucleus where $V(r) = 0$. We obtained the radial solution earlier. Using Eq.~\eqref{Eq:nuclearData_schrodingerTransformedRadialSolution} and defining the constants as in \eqref{Eq:nuclearData_radialSchrodingerConstantRedefinition}, we can write the radial wavefunction as
+\begin{align}
+  R_\ell(r) = C_\ell \left[ \cos\delta_\ell j_\ell(kr) - \sin\delta_\ell \eta_\ell(kr) \right] ,
+\end{align}
+and the derivative,
+\begin{align}
+  r R'_\ell(r) = C_\ell k r \left[ \cos\delta_\ell j'_\ell(kr) - \sin\delta_\ell \eta'_\ell(kr) \right]
+\end{align}
+Here the prime denotes the derivative with respect to $r$. Evaluating these at $r = a$ and taking their ratio  gives
+\begin{align}
+  \beta_\ell = ka \frac{ \cos\delta_\ell j'_\ell(ka) - \sin\delta_\ell \eta'_\ell(ka) }{ \cos\delta_\ell j_\ell(ka) - \sin\delta_\ell \eta_\ell(ka) }
+\end{align}
+Next divide by $\cos\delta_\ell$ in both the numerator and the denominator:
+\begin{align} 
+  \beta_\ell = ka \frac{  j'_\ell(ka) - \tan\delta_\ell \eta'_\ell(ka) }{  j_\ell(ka) - \tan\delta_\ell \eta_\ell(ka) } .
+\end{align}
+We can then solve for the tangent of the phase shift,
+\begin{align} \label{Eq:nuclearData_tangentPhaseShift}
+  \tan\delta_\ell = \frac{ ka j'_\ell(ka) - \beta_\ell j_\ell(ka) }{ ka \eta'_\ell(ka) - \beta_\ell \eta_\ell(ka) }
+\end{align}
+
+The remaining task is then to find $\beta_\ell$ using the solution of the radial Schr\"{o}dinger equation inside the nucleus where $V(r) \ne 0$. We can write the equation for $u_\ell(r) = r R_\ell(r)$ as
+\begin{align} \label{Eq:nuclearData_radialSchrodingerNumericallyStableForm}
+  r^2 \frac{d^2 u_\ell}{dr^2} + \left( k^2 r^2 - \ell(\ell+1) - \frac{2m}{\hbar^2} r^2 V(r) \right) u_\ell(r) = 0.
+\end{align}
+Here we moved the $r^2$ in the numerator because we will need to normally apply numerical integration and dividing by a small number squared leads to poorly behaved solutions. We now need to prescribe boundary conditions for at $r = 0$, the origin, and $r = a$, the edge of the nucleus. For the origin, we require
+\begin{align}
+  u_\ell(0) = 0,
+\end{align}
+which is necessary to keep the solution finite. We also need to select the value at the edge of the nucleus. Since the wavefunction is always proportional to a constant related to the intensity of the incident neutron beam and we are concerned with a ratio anyway, we can just pick the value at the edge. For instance,
+\begin{align}
+  u_\ell(a) = 1
+\end{align}
+is a perfectly valid choice.
+%
+%
+%need to match the solution for the exterior near the nucleus. For this, we are going to do a bit of a slight of hand. Let's introduce a new special function,
+%\begin{align}
+%  h^{(1)}_\ell(x) = j_\ell(x) + i \eta_\ell(x) ,
+%\end{align}
+%that is called the \emph{spherical Hankel function of the first kind} and is simply a linear combination of the spherical Bessel and Neumann functions. This allows us to recast Eq.~\eqref{Eq:nuclearData_schrodingerTransformedRadialSolution} as
+%\begin{align}
+%  u_\ell(r) = K_\ell r h^{(1)}_\ell(kr) .
+%\end{align}
+%Here $K_\ell$ is an arbitrary constant proportional to the intensity of the neutron beam that we can take to be one. (The value of this constant is irrelevant since we will be taking a ratio in the end.) This means the boundary condition at the surface of the nucleus is
+%\begin{align}
+%  u_\ell(a) = a h^{(1)}_\ell(ka) .
+%\end{align}
+
+Next, we impose a radial discretization with $r_0, r_1, \ldots, r_N$, where $r_0 = 0$ and $r_N = a$ with uniform spacing $\Delta r$ on the problem. We then map Eq.~\eqref{Eq:nuclearData_radialSchrodingerNumericallyStableForm} using the finite difference method. The function evaluated at a point is defined as
+\begin{align}
+  u(r_i) = u_i.
+\end{align}
+Here we omitted the $\ell$ subscript for clarity. The central difference for the second derivative is
+\begin{align}
+  r^2 \frac{d^2 u}{dr^2} \bigg|_{r = r_i} \approx  r_i^2 \frac{ u_{i-1} - 2 u_i + u_{i+1} }{ ( \Delta r )^2 } , \quad i = 1, \ldots, N-1 .
+\end{align}
+This yields a system of equations that can be written in a tridiagonal form and solved numerically. Next, we need to estimate the derivative at the surface of the nucleus of $R_\ell(r)$. This is best done with a second-order backward difference scheme,
+\begin{align}
+  \frac{dR}{dr}  \bigg|_{r = r_i} \approx \frac{ 3R_i - 4 R_{i-1} + R_{i-2} }{ 2 \Delta r } .
+\end{align}
+Once this derivative of $u$ is known, we can find the $\beta_\ell$ by evaluating $R'_\ell(a)/R_\ell(a)$ and use Eq.~\eqref{Eq:nuclearData_tangentPhaseShift} to find the tangent of the phase shift.
+
+\subsection{Optical Theorem}
+
+Before we move on to an example, there is one other interesting and important result. Because $P_\ell(1) = 1$ for any $\ell$, we can derive an expression for the cross section in terms of the function $f(\theta = 0)$. Here we have
+\begin{align}
+  f(0) =  \sum_{\ell=0}^\infty ( 2\ell + 1 ) \frac{ e^{i \delta_\ell } }{k} \sin\delta_\ell .
+\end{align}
+Applying Euler's formula and doing a bit of rearrangement,
+\begin{align}
+  f(0) = \frac{1}{k} \sum_{\ell=0}^\infty  ( 2\ell + 1 ) \cos\delta_\ell \sin\delta_\ell  + i ( 2\ell + 1 )  \sin^2\delta_\ell ,
+\end{align}
+and then taking the imaginary part yields
+\begin{align}
+  k \text{Im}[ f(0) ] =  \sum_{\ell=0}^\infty ( 2\ell + 1 )  \sin^2\delta_\ell .
+\end{align}
+Plugging this into Eq.~\eqref{Eq:nuclearData_crossSection_PhaseShift} gives the following:
+\begin{align}
+  \sigma = \frac{4\pi}{k} \text{Im}[ f(0) ].
+\end{align}
+This final result is called the \emph{optical theorem}, which directly relates the cross section to the forward-pointed $(\theta = 0)$ scattering amplitude. 
+
+\subsection{Potential (Hard-Sphere) Scattering}
+
+A simple case that is relevant is neutron potential scattering, where the neutron elastically bounces off the surface with the surface of a nucleus and does not penetrate into the nucleus at all. The potential $V(r)$ in this case is well approximated as a hard-sphere potential:
+\begin{align}
+  V(r) = \left\{ \begin{array}{l l}
+  \infty, 	& \quad r < a, \\
+  0,		& \quad r \ge a. \\ \end{array} \right.
+\end{align}
+Therefore we know that $\psi(a,\theta) = 0$ since the wavefunction is zero inside our nucleus with the hard-sphere potential. Because of this the radial function $R(a) = 0$, meaning $\beta_\ell \rightarrow \infty$.
+
+Taking this limit in Eq.~\eqref{Eq:nuclearData_tangentPhaseShift}, we get
+\begin{align} 
+  \tan\delta_\ell = \lim_{\beta_\ell \rightarrow \infty} \frac{ ka j'_\ell(ka) - \beta_\ell j_\ell(ka) }{ ka \eta'_\ell(ka) - \beta_\ell \eta_\ell(ka) } = \frac{ j_\ell(ka) }{ \eta_\ell(ka) } .
+\end{align}
+To get the cross section, we need $\sin^2\delta$. For this we can use the trigonometric identity to obtain
+\begin{align}
+  \sin^2\delta_\ell = \frac{ \tan^2\delta_\ell }{ 1 + \tan^2\delta_\ell } = \frac{ j^2_\ell(ka) }{ j^2_\ell(ka) + \eta^2_\ell(ka) } .
+\end{align}
+The kinetic energies of neutrons typically encountered in a nuclear reactor have wavelengths that are large with respect to the size of the nucleus. This implies $k a \ll 1$. Returning to $\sin^2\delta_\ell$, we have
+\begin{align}
+  \sin^2 \delta_\ell \approx  \frac{ j_\ell^2(ka) }{ \eta_\ell^2(ka) } , \quad ka \ll 1.
+\end{align}
+For small argument, the $\eta_\ell(ka)$ term dominates over the $j_\ell(ka)$ term. Using the series expansions in Eq.~\eqref{Eq:nuclearData_sphericalBesselSeriesExpansions}, we obtain
+\begin{align}
+   \frac{ j_\ell(ka) }{ \eta_\ell(ka) } 
+  = \frac{1}{2\ell + 1} \left[ \frac{2^\ell \ell !}{ (2\ell)! } \right]^2 (ka)^{2\ell+1}
+\end{align}
+The scattering cross section is then approximately
+\begin{align}
+  \sigma \approx \frac{4\pi}{k^2} \sum_{\ell = 0}^\infty \frac{1}{2 \ell + 1 }  \left[ \frac{2^\ell \ell !}{ (2\ell)! } \right]^4 (ka)^{2(2\ell+1)}.
+\end{align}
+Since $ka \ll 1$, we can see that the $\ell = 0$ term dominates the others. Discarding higher order terms gives the potential scattering cross section
+\begin{align}
+  \sigma_p = 4\pi a^2 = 4 \pi a_s^2.
+\end{align}
+Here we define $a_s$ as the \emph{scattering width}, where for the hard-sphere potential is the same as the radius of the nucleus. Note that this is not the case for potentials with a finite depth.
+
+We can also find the phase shift for the low-energy or s-wave case. Using \eqref{Eq:nuclearData_sphericalBesselZerothOrder}, we have
+\begin{align} \label{Eq:nuclearData_sWave_PhaseShift_scatterWidth}
+  \tan \delta_0 = -\tan(ka) , \quad \delta_0 = -ka_s .
+\end{align}
+This is called \emph{s-wave scattering} and we refer to $a$ as the \emph{scattering width}. 
+
+Note that in classical physics, the cross sectional area would be $\pi a^2$, the area of the circle seen by the neutron. The wavelike nature of matter in quantum mechanics gives an extra factor of 4. In a sense, the wave function ``sees'' the entire surface of the sphere as it moves around the nucleus, whereas a classical particle would only see the area of the circle. 
+
+\subsection{Low-Energy Scattering in a Constant Potential}
+
+We stated in the previous example the the scattering width differs with a finite potential well. Here, let us consider the potential
+\begin{align}
+  V(r) = \left\{ \begin{array}{l l}
+  -V_0, 	& \quad r < a, \\
+  0,		& \quad r \ge a. \\ \end{array} \right.
+\end{align}
+Here $V_0$ is some positive value. The negative sign means that this potential is a well with a depth of $V_0$. Similar to the wave number, we define
+\begin{align}
+  \gamma^2 = \frac{ 2 m V_0 }{ \hbar^2 } .
+\end{align}
+
+Here we consider the case of low-energy scattering, which motivates us to consider the $\ell = 0$ or $s$-wave term only. The total wavefunction outside the nucleus is then
+\begin{align}
+  \psi(r,\theta) = A \frac{ \sin( kr + \delta_0 ) }{ kr } , \quad r > a.
+\end{align}
+For the case inside the nucleus, the $\ell = 0$ term is
+\begin{align}
+  \psi(r,\theta) = A \frac{ \sin( \sqrt{ k^2 + \gamma^2 } r ) }{ \sqrt{ k^2 + \gamma^2 } r } .
+\end{align}
+
+The wavefunction and its radial derivative must be continuous across the interface at $r = a$. As before, we take the ratio of the radial derivative to the wavefunction to be continuous, which eliminates the constants. This gives the relationship
+\begin{align}
+  \frac{ \tan(ka + \delta_0) }{ ka } = \frac{ \tan( \sqrt{ k^2 + \gamma^2 } a ) }{ \sqrt{ k^2 + \gamma^2 } a  }
+\end{align}
+To tidy up the notation going forward, let $k' = \sqrt{k^2 + \gamma^2}$. Then,
+\begin{align}
+  \frac{ \tan(ka + \delta_0) }{ ka } = \frac{ \tan( k' a ) }{ k' a  } \nonumber
+\end{align}
+To isolate $\tan\delta_0$, we apply the tangent-sum identity,
+\begin{align}
+  \tan(x + y) = \frac{ \tan(x) + \tan(y) }{ 1 - \tan(x) \tan(y) }, \nonumber
+\end{align}
+to obtain
+\begin{align}
+  \frac{ \tan(ka) + \tan\delta_0 }{ 1 - \tan(ka) \tan\delta_0 } = \frac{k}{k'} \tan( k' a ) .
+\end{align}
+Since $ka$ is small, then $\tan(ka) \approx ka$. Solving for $\tan\delta_0$ after this approximation gives
+\begin{align}
+  \tan\delta_0 \approx \frac{ (k/k') \tan(k' a) - k a }{ 1 + (k/k') (ka) }.
+\end{align}
+However, if we inspect the denominator, the second term is small as well. Therefore, we can write
+\begin{align} \label{Eq:nuclearData_tangentPhaseLowEnergyConstantPotentialWell}
+  \tan\delta_0 \approx ka \left[ \frac{ \tan(k' a) }{ k' a } - 1 \right] .
+\end{align}
+
+The presence of the $\tan(\gamma a)$ term yields some interesting behavior. When the right-hand side is small (we will deal this contrary case shortly), the phase shift is small and $\tan\delta_0 \approx \delta_0 \approx -k a_s$ from our hard-sphere example. This implies that, when this is satisfied, the scattering width is
+\begin{align}
+  a_s = a \left( 1 - \frac{\tan(k' a)}{k' a} \right).
+\end{align}
+Since we assumed $\tan\delta$ is small, then $\sin\delta$ is also small. From this chain of reasoning, we see that the cross section is
+\begin{align}
+  \sigma = 4 \pi a^2 \left( 1 - \frac{\tan(k' a)}{k' a} \right)^2 = \sigma_p \left( 1 - \frac{\tan(k' a)}{k' a} \right)^2 , \quad \tan\delta_0 \approx 0 .
+\end{align}
+If $V_0$ is much larger than the neutron energy $E$ (which is already assumed to be small), then $k' \approx \gamma$, and the cross section is energy independent, being the hard-sphere cross section times a correction factor that only depends on $V_0$.
+
+If we inspect this solution, there are cases where the cross section may depend strongly on energy. First, there  is a set of values of $\tan(k'a) \approx k'a$ making the cross section go to zero. (The actual cross section is not precisely zero because there are small $\ell > 0$ terms still present.) Writing out
+\begin{align}
+  (k')^2 = k^2 + \gamma^2 = \frac{2m}{\hbar^2} ( E + V_0 ) , \nonumber
+\end{align}
+we can solve for the energies where this would occur (e.g., when $k'a \approx 4.493$) that may be small enough to not violate our assumption that $ka \ll 1$. For these particular values, the nucleus is essentially transparent to the neutrons. 
+
+It is also possible for $\tan(k'a)$ to be arbitrarily large. This implies $\delta_0$ is near $\pi/2$ and we can see from Eq.~\eqref{Eq:nuclearData_crossSection_PhaseShift} that the cross section will reach a maximum value with $\sin^2\delta$ tending toward one with
+\begin{align}
+  \sigma \approx \frac{4\pi}{k^2} = 4\pi \frac{\hbar^2}{2mE}, \quad \tan\delta_\ell \rightarrow \infty .
+\end{align}
+Not only is the cross section much larger, but it is now a function of energy. Since the tangent grows rapidly over a narrow range, the cross section can end up varying quite fast. This leads us into our discussion of resonances in the next section.
+
+\section{Resonances}
+
+As discussed in the previous section, theoretical models of the cross sections can vary sharply with energy over narrow ranges. These arise in nuclear physics because neutrons near particular energies have a propensity to form excited bound states in the compound nucleus. In this section, we will develop the basic mathematical models used to describe the energy dependence of the cross section $\sigma(E)$ in these narrow ranges.
+
+\subsection{Bound States}
+
+Let's go back to a particle trapped within a potential well. We know from quantum mechanics that the particle is restricted to having discrete energies, which are the eigenvalues of the operator within the Schr\"{o}dinger equation. However, unlike classical particles, it is not strictly confined to be within the well and may occasionally be found outside. At low-energy, the $\ell = 0$ or $s$-wave term is dominant and the wavefunction in this case falls off exponentially as
+\begin{align}
+  \psi = A \frac{e^{-\kappa r}}{r} .
+\end{align}
+Note that we can connect this to an outgoing wave solution if we let $\kappa = -ik$, which is an imaginary number.
+
+From earlier, we derived the $s$-wave outgoing wave function (far from the nucleus) as
+\begin{align} 
+  \psi = A \frac{ e^{2i\delta_0} e^{ikr} - e^{-ikr} }{2ikr}  . 
+\end{align}
+In an attempt to connect these two equations, we can write $k = i\kappa$,
+\begin{align} 
+  \psi = A \frac{ e^{\kappa r} - e^{2i\delta_0} e^{-\kappa r}  }{2\kappa r}  . 
+\end{align}
+On the surface, this would mean that the wavefunction would grow exponentially without bound and clearly cannot be physically meaningful. However, there is one exception to this. Suppose we stretch our imaginations for a moment and assume the factor $e^{2i\delta_0}$ can be assigned an arbitrarily large value such that for any value of $r$, the decaying exponential term dominates the rising exponential term. (Thinking about infinities is always tricky.) For this to be possible though, we need to allow ourselves to think about complex numbers. While this may seem weird, we will justify things in a bit.
+
+Recall that from our discussion of the $S$-matrix [see Eqs.~\eqref{Eq:nuclearData:nuclearData_SmatrixDefinition} to \eqref{Eq:nuclearData_Smatrix_fl}] that
+\begin{align}
+  e^{2i\delta_0} = 1 + 2 i k f_0(k) . \nonumber
+\end{align}
+We then have
+\begin{align}
+  f_0(k) = \frac{e^{i\delta_0}}{k} \sin\delta_0 = \frac{1}{k} \frac{ \sin\delta_0 }{ \cos\delta_0 - i \sin\delta_0 } = \frac{1}{k} \frac{ 1 }{ \cot\delta_0 - i } . \nonumber
+\end{align}
+But for $s$-wave scattering, we concluded from Eq.~\eqref{Eq:nuclearData_sWave_PhaseShift_scatterWidth} that $\tan\delta_0 = -\tan(ka)$. If $ka$ is small, as in the low-energy case, then $\tan(ka) \approx ka$. Therefore,
+\begin{align}
+  f_0(k) = \frac{1}{k} \frac{ 1 }{ (-1/ka) - i } , \nonumber
+\end{align}
+and
+\begin{align}
+  e^{2i\delta_0} = -\frac{ka + i}{ka - i} . \nonumber
+\end{align}
+If we choose, $k = i/a$, then our factor $e^{2i\delta_0}$ will become infinite and satisfy the hypothetical criterion of having an infinite term in front of the decaying exponential. This would also imply that our exponential attenuation coefficient $\kappa = 1/a$, which is obviously real and means exponential decay. The neutron energy, according to the standard expression in terms of the wave number, would be
+\begin{align}
+  E = \frac{\hbar^2 k^2}{2m} = -\frac{\hbar^2}{2ma^2} .
+\end{align}
+This negative energy corresponds to energies associated with bound states. (If it helps, if we use $\kappa$ instead of $k$, we get real bound state energies.) These ``negative-energy'' bound states contribute to the overall cross section and are necessary to explain measured cross sections.
+
+%This implies that our bound-state energy is real and has the value of
+
+
+\subsection{Complex Plane and Residue Theorem}
+
+Admittedly, this extension to the complex plane for the wavenumber with negative energy feels like an artifact of bookkeeping and could be fixed by simply keeping the sign positive. It even gets weirder in that the cross sections exhibit resonant behavior that arise because of \emph{complex-valued} energies, which are a lot harder to explain. It seems we may be reading too deeply into the math and losing sight of the actual physics. This is a legitimate interpretation, but the reality is that abstract mathematical quantities can teach us something about the real universe and help us solve practical problems.
+
+There is a powerful theorem called the residue theorem that helps explain how complex valued quantities influence real-valued ones. The theorem states that if we have an integral over a closed contour on the complex plane, then the result of that integral is directly related to the sum of contributions from singularities or poles enclosed by that contour:
+\begin{align}
+  \oint f(z) dz = 2\pi i \sum_{j \text{ poles enc}} \text{Res}(f(z_j)) .
+\end{align}
+where $f(z)$ is a complex function and $\text{Res}(f(z_j))$ are the residues. For simple (first-order) poles at $z_j$ these can be computed by
+\begin{align}
+  \text{Res}(f(z_j)) = \lim_{z \rightarrow z_j} ( z - z_j ) f(z) .
+\end{align}
+There are formulas for higher-order poles involving derivatives of $f(z)$, but that is not important here.
+
+In many physics problems, we are often faced with the task of computing integrals over the real number line or the positive real number line. Many (but not all) integrals of this form can be expressed as an equivalent closed contour on the complex plane. The task then becomes identifying the singularities or poles enclosed by the contour and evaluating their residues.
+
+%Let's do a couple simple examples. First, let's consider
+%\begin{align}
+%  \int_0^\infty \frac{dx}{1 + x^2} . \nonumber
+%\end{align}
+%We know how to do this through a trigonometric substitution and compute the antiderivative is $\tan^{-1}(x)$ to yield $\pi/2$. However, we can do this using the residue theorem as well. Suppose we let $x \rightarrow z$ a complex variable and we observe that this is an even function
+%\begin{align}
+%  \int_0^\infty \frac{dz}{1 + z^2} = \frac{1}{2} \int_{-\infty}^\infty \frac{dz}{1 + z^2} = \frac{1}{2} int_{-\infty}^\infty \frac{dz}{(z + i)(z - i)} . \nonumber
+%\end{align}
+%Now, we can transform to polar coordinates $z = re^{i\theta}$ with $dz = 
+
+The upshot is that the residue theorem provides the connection between abstract quantities on the complex plane, specifically the poles, and the real numbers where solutions to actual engineering problems exist. It is often the case that we can ascribe a physical significance to these poles in a broad class of physical problems. In this specific case, the complex-valued energies are not physical in and of themselves, but nonetheless can be interpreted as providing information about resonances that have a major impact on the cross section and physical reaction probabilities that can be measured and confirmed in the laboratory. In fact, the nuclear data files contain information about resonances situated at both negative (bound-state) energies and positive ones.
+
+\subsection{Breit-Wigner Formula}
+
+When we do an analysis of resonance problems and derive the $S$-matrix for states for $s$-wave (low-energy) scattering, we get singularities or poles in the complex plane of the form
+\begin{align}
+  E = E_0 - i \frac{\Gamma}{2} .
+\end{align}
+Here $E_0$ is a real (not necessarily positive) energy that denotes the center point of the resonance and $\Gamma$ is the offset from the real axis onto the negative imaginary part of the complex plane and is referred to as the \emph{total resonance width}. This quantity has a physical interpretation that we can relate to the expected lifetime of the bound state via the uncertainty principle. This lifetime is
+\begin{align}
+  \tau = \frac{\hbar}{\Gamma}.
+\end{align}
+Longer-lived states have a narrower range of measured energies in the laboratory.
+
+We can relate these poles to the $S$-matrix element via
+\begin{align}
+  e^{2i\delta_0} = \frac{ E - E_0 - i \Gamma / 2 }{ E - E_0 + i \Gamma / 2 } .
+\end{align}
+To get the $s$-wave cross section we need to find $\sin^2\delta_0$. Perhaps the easiest approach is to expand out left-hand side with Euler's identity and group the right-hand side with real and imaginary components:
+\begin{align}
+  \cos(2\delta_0) + i \sin(2\delta_0) = \frac{ ( E - E_0 )^2 - \Gamma^2 / 4 }{ ( E - E_0 )^2 + \Gamma^2 / 4  } - i \frac{ ( E - E_0 ) \Gamma }{ ( E - E_0 )^2 + \Gamma^2 / 4  }.
+\end{align}
+By observing the real part of each side we have
+\begin{align}
+  \cos(2\delta_0) = \frac{ ( E - E_0 )^2 - \Gamma^2 / 4 }{ ( E - E_0 )^2 + \Gamma^2 / 4  } . \nonumber
+\end{align}
+Next, apply the double-angle formula,
+\begin{align}
+  \cos(2x) = 1 - 2 \sin^2 x, \nonumber
+\end{align}
+to get
+\begin{align}
+  \sin^2 \delta_0 = \frac{ \Gamma^2 }{ 4 ( E - E_0 )^2 + \Gamma^2 } .
+\end{align}
+Therefore, the cross section is
+\begin{align}
+  \sigma(E) = \frac{4\pi}{k^2}\frac{ \Gamma^2 }{ 4 ( E - E_0 )^2 + \Gamma^2 } =  \frac{4\pi \hbar^2}{2m} \frac{ \Gamma^2 }{ 4 ( E - E_0 )^2 + \Gamma^2 } \frac{1}{E}.
+\end{align}
+This is referred to as the \emph{Breit-Wigner formula} and describes the characteristic shape of resonances. 
+
+\subsection{Resonance Cross Sections}
+
+Of course, the actual nucleus is a bit more complicated than the simplistic analysis we used, but the same basic conclusions hold. First, we assumed a single type of reaction in our analysis. We will now discuss what goes into the Breit-Wigner formula for neutron interactions on resonances.
+
+A neutron entering a nucleus could result in multiple outcomes. Here we consider scattering (the emission of a neutron), capture (accompanied by the emission of a photon or $\gamma$ ray), and fission. Here we define absorption as capture plus fission. The resonance width $\Gamma$ can be expressed as a sum of partial resonance widths:
+\begin{align}
+  \Gamma(E) = \Gamma_n(E) + \Gamma_\gamma + \Gamma_f ,
+\end{align}
+where the subscripts are for scattering, capture, and fission respectively. The neutron resonance width depends on the incident neutron energy $E$ because of different angular momenta of emitted neutrons. The absorption (capture and fission) widths technically vary slightly with energy, but this dependence is weak, so we ignore it. The neutron resonance width depends on the angular momentum state $\ell$ of the emitted neutron, which varies as $E^{\ell + 1/2}$. We are most often interested in low-energy resonances $\ell = 0$, so we often write the energy-dependent neutron width as
+\begin{align}
+  \Gamma_n(E) = \Gamma_n \sqrt{ \frac{E}{E_0} },
+\end{align}
+where $\Gamma_n$ without the energy dependence is the neutron resonance width taken at energy $E_0$ corresponding to the center of the resonance. It turns out that because the resonance is narrow with respect to the change in energy, we often neglect the energy dependence of the \emph{total} resonance width,
+\begin{align}
+  \Gamma \approx \Gamma_n + \Gamma_\gamma + \Gamma_f .
+\end{align}
+This vastly simplifies the analysis with minimal impact on the accuracy of the cross sections.
+
+Scattering is different because it involves the a neutron entering and leaving the nucleus, whereas in the other two reactions the neutron is absorbed and could result in either the emission of a $\gamma$ or causing a fission if it is energetically favorable to do so. 
+
+The $s$-wave Breit-Wigner cross section for absorption-type reactions, either capture ($x = \gamma$) or fission ($x = f$) is
+\begin{align}
+  \sigma_x(E) = 4 \pi \lambdabar^2 g  \sqrt{ \frac{E}{E_0} }  \frac{ \Gamma_n \Gamma_x }{ 4 ( E - E_0 )^2 + \Gamma^2 } .
+\end{align}
+One difference is that the numerator of the Breit-Wigner formula is $\Gamma_n \Gamma_x$, the product of the total width and the width for the reaction. 
+
+There are a couple unfamiliar things here, however. The first is $\lambdabar$, which is called the \emph{reduced wavelength}. This is a consequence that the cross sections are done in the center-of-mass frame and the mass needs to be the reduced mass of the neutron-nucleus system. The reduced wavelength is
+\begin{align}
+  \lambdabar = \frac{ \hbar }{ m_r v },
+\end{align}
+where $m_r$ is the reduced mass of the target atom given by
+\begin{align} \label{Eq:nuclearData_reducedMass}
+  m_r = \frac{ A m_n }{ A + 1 } ,
+\end{align}
+where $m_n$ is the neutron mass, $A m_n$ is the mass of the nucleus (recall $A$ is the ratio of the mass of the nucleus to mass of the neutron), and $v$ is the neutron speed.
+
+Next, there is a factor $g$ that is the \emph{statistical spin factor}. This factor accounts for the effect of quantum spin and is needed because a neutron that gets absorbed by the nucleus will create a compound nucleus in one of many possible excited states, each having different angular momenta. A neutron has a spin of $s_n = 1/2$ and an orbital angular momentum of $\ell \hbar$. This neutron combines with a nucleus with spin $I$ (could be a full or half integer) to produce a nucleus with excited state $J$ satisfying the range
+\begin{align}
+  | I - \ell \pm \frac{1}{2} | \le J \le I + \ell + \frac{1}{2} .
+\end{align}
+The spin factor is then
+\begin{align}
+  g = \frac{ 2J + 1 }{ ( 2s_n + 1 ) ( 2I + 1 ) } = \frac{ 2J + 1 }{ 2 ( 2 I + 1 ) }.
+\end{align}
+The statistical spin factor accounts for the all possible spin states the compound nucleus can be in.
+
+The Breit-Wigner formula is often further simplified by defining the reduced wavelength at the resonance peak energy,
+\begin{align}
+  \lambdabar = \lambdabar_0 \sqrt{ \frac{E_0}{E} } .
+\end{align}
+Substituting this in and pulling out ratios of the resonance widths of the neutron and capture/fission gives
+\begin{align} 
+  \sigma_x(E) = \left[ 4 \pi \lambdabar^2_0 g \frac{\Gamma_n}{\Gamma} \right] \frac{\Gamma_x}{\Gamma}  \sqrt{ \frac{E_0}{E} } \frac{ \Gamma^2 }{ 4 ( E - E_0 )^2 + \Gamma^2 } .
+\end{align}
+The term in brackets is a constant factor with units of area and is interpreted as a cross section
+\begin{align}
+  \sigma_0 = 4 \pi \lambdabar^2_0 g \frac{\Gamma_n}{\Gamma} . \label{Eq:nuclearData_resonancePeakCrossSection}
+\end{align}
+Therefore, we write the Breit-Wigner formula for the absortion-type cross section as
+\begin{align} \label{Eq:nuclearData_breitWignerAbsorptionXS}
+  \sigma_x(E) = \sigma_0 \frac{\Gamma_x}{\Gamma}  \sqrt{ \frac{E_0}{E} } \frac{ \Gamma^2 }{ 4 ( E - E_0 )^2 + \Gamma^2 } .
+\end{align}
+The $\sigma_0$ and resonance widths at the peak values are measured experimentally and are available in nuclear data libraries.
+
+We can obtain a similar, but more complicated expression from scattering. In the previous section, we showed the result for resonance scattering alone. In reality, this text left out a detail so as not to confuse matters and introduce the topic. In reality, we have a contribution from potential scattering multiplied onto the resonance term, when we multiply this out we get three terms: our potential scattering term, the resonance term we saw before, and a new cross term between potential and resonance scattering called the interference term. Taken together, the $s$-wave Breit-Wigner equation for the scattering cross section is
+\begin{align} \label{Eq:nuclearData_breitWignerElasticXS}
+  \sigma_s(E) = \underbrace{4 \pi a^2}_\text{Potential} + \sigma_0  \frac{ \Gamma^2 }{ 4 ( E - E_0 )^2 + \Gamma^2 } \left[ \underbrace{\frac{\Gamma_n}{\Gamma}}_\text{Resonance} + \underbrace{\frac{ 4 ( E - E_0 ) }{\Gamma} \frac{a}{\lambdabar_0}}_\text{Interference} \right] .
+\end{align}
+Here $a$ is the effective radius of the nucleus, which is often well approximated by
+\begin{align}
+  a = 1.25 A^{1/3} \text{ fm}. \nonumber
+\end{align}
+
+The cross sections $\sigma_x(E)$ and $\sigma_s(E)$ assumed $\ell = 0$, which is valid for low-energy interactions. As neutrons get to higher energies, additional values of $\ell$ need to be considered. More generally, while the Breit-Wigner formalisms are useful approximations, especially for pedagogical purposes, rarely are they used to describe resonances in modern nuclear data formats. These use forms such as the $R$ matrix or Reich-Moore formalisms that are able to describe more of the physics without making so many approximations. Unfortunately, this added flexibility comes with added complexity, so we leave this discussion here.
+
+\subsection{Resolved and Unresolved Resonance Ranges}
+
+At low neutron energies, the energy states in the nucleus are well separated and the resonances are spaced far apart from each other. As the neutron energies get higher, the energy states become closer together and the resonances begin to overlap and interfere with one another. Eventually they become so close together that they blend into a continuum. Also as the energy increases, our ability to experimentally resolve increasingly close-spaced resonances diminishes. Eventually, we are unable to describe each individual resonance. Therefore, we often think of the resonance range to be in two parts: the resolved resonance range and the unresolved resonance range. Where this separation occurs depends both on the isotope, with heavier isotopes having more resonances and tending to be lower, as well as the amount of effort spent experimentally analyzing it. In fact, as nuclear data libraries have matured, the resolved resonance range has grown to higher energies with time because of improvements in experiments and analytical techniques.
+
+In the resolved resonance range, the nuclear data contains information about all the resonances. These data can be used to construct resonance cross sections and are superimposed onto a background (e.g., potential scattering) cross section.
+
+In the unresolved resonance range, the resonances are described statistically. As the number of resonances becomes large and close together, their spacings and width appear random, approximately following statistical distributions. Given parameters that go into these distributions, random realizations of the neutron cross section in the unresolved resonance range are generated and statistics are collected to find average cross sections and frequency distributions for the value of the cross section at particular energies. These are called probability tables and are used in calculations for estimating the behavior of neutrons in the unresolved resonance range.
+
+\section{Capture}
+
+Neutron capture reactions are defined to be ones where a neutron enters and zero neutrons emerge or an (n,0n) reaction. A capture reaction is always, except in very extreme circumstances, energetically favorable, having a positive $Q$ value. Because of the energy produced by adding a neutron, usually there is some kind of secondary particle; these are mostly photons or $\gamma$ particles for heavy nuclei and sometimes protons or helium-nuclei $\alpha$ particles for lighter ones. In nuclear reactors, these kinds of secondaries usually do not contribute to creating more neutrons and therefore are considered a loss, as they do not contribute to maintaining the fission chain reaction. Nonetheless, they are vital to consider because we need to quantify the losses to balance them with gains from fission.
+
+In our discussion resonances, we obtained an expression for the absorption cross section in Eq.~\eqref{Eq:nuclearData_breitWignerAbsorptionXS}, where here $x = \gamma$ for the radiative capture cross section: 
+\begin{align} \label{Eq:nuclearData_breitWignerCaptureXS}
+  \sigma_\gamma(E) = \sigma_0 \frac{\Gamma_\gamma}{\Gamma}  \sqrt{ \frac{E_0}{E} } \frac{ \Gamma^2 }{ 4 ( E - E_0 )^2 + \Gamma^2 } .
+\end{align}
+
+One notable feature here is that if we ignore the resonance term, we see the behavior of the background cross section goes as $1/\sqrt{E}$ or $1/v$, inverse neutron speed. This $1/v$ behavior is characteristic of neutron capture cross sections across a very large energy range. There are a couple ways one can interpret this $1/v$ behavior. First, slower neutrons are spending more time near the nuclear potential and have a greater time window upon which they can fall into the potential well and become trapped. Another way relies on the uncertainty principle, $\Delta p \Delta x \ge \hbar / 2$. The slower the speed, the smaller the momentum and larger the uncertainty in the position. This means that a slower neutron has a less certain position and larger chance of finding itself within the nucleus and will therefore form a compound nucleus. A quick calculation shows that the uncertainty in position would scale as the uncertainty of the inverse of the momentum, which would be proportional to the inverse speed.
+
+Honestly there is not much more to say about capture reactions beyond what was said in this and preceding sections. We will move onto something more complicated and vitally important to nuclear reactors: fission.
+
+\section{Fission}
+
+The fission process is one where a neutron is initially captured by a nucleus to form a compound nucleus in an excited state. These excited states can cause the nucleus to vibrate. For very heavy nuclei, like uranium and plutonium, the size of the nucleus is large, and these vibrations can be large enough to deform the nucleus to where its size is larger than the range of the strong nuclear force, at which point electrostatic repulsion can dominate and push the nucleus apart into two fragments.
+
+Deforming the nucleus to the point where this can occur takes a significant (several MeV) worth of energy. This amount of energy is called the \emph{fission barrier} and is analogous to an activation energy in chemical reactions. The $Q$ values for neutron capture reactions on some nuclei, like $^{233}$U, $^{235}$U, and $^{239}$Pu are larger than the fission barrier such that an incident neutron with any kinetic energy can induce fission. We refer to such isotopes as \emph{fissile} and these are candidates for nuclear fuel in a reactor. 
+
+There are other isotopes, like $^{232}$Th and $^{238}$U for which the $Q$ value for neutron capture is too small to overcome this barrier on its own, so extra kinetic energy from the incident neutron is needed to overcome the barrier. We refer to such nuclei as \emph{fissionable}. (Note that fission off these two isotopes by low-energy neutrons is still possible, but very unlikely, because there are multiple ways that the nucleus can deform with differing activation energies, but these are quite improbable.) 
+
+The two aforementioned isotopes in particular are also \emph{fertile} in that their capture leads to a radioactive nucleus that eventually decays into a fissile one. Many reactor designs depend on these fertile isotopes to make fuel. In fact, it is possible to produce more fuel than burned, and these are called breeder reactors. For example, the thorium cycle depends on producing $^{233}$U as its primary fuel from fissionable $^{232}$Th.
+
+The fission process proceeds in a sequence of steps as follows:
+\begin{enumerate}
+  \item A neutron is captured and puts the nucleus into an excited state;
+  \item if the excitation energy is sufficient, it is possible for the nucleus to end up into a configuration where fission is possible. This begins with the nucleus becoming highly elliptical. Once the semi-major axis of the ellipse is becomes on the order of the range of the strong nuclear force, the nucleus can evolve into a dumbbell-like shape. From here the electrostatic force can take over and snap the neck and scission (splitting) can occur.
+  \item Once scission occurs, we have two fragments with a very large amount of energy. The total energy is subdivided into kinetic and excitation energy of the fragments.  These two fragments are repelled by electrostatic forces away from each other at high velocities and slow down because of electromagnetic interactions with the atoms in the material. This converts the kinetic energy of the fragments into thermal energy, and is the primary source of heat in a nuclear reactor.
+  \item After the fragments have been slowed down, they remain in a highly excited state. Often, the excitation energy is much larger than the separation energy of the neutron in the fragment to permit neutron transmission to occur. (We can calculate this using the quantum scattering methods we discussed earlier.) Often the amount of excitation energy is so large that multiple neutrons from each fragment can be emitted, but a typical number among both fragments is 2-3.
+  \item Once enough of the kinetic energy has been removed by neutrons, the fragments remain in an excited state, but this energy is not sufficient to emit a neutron. The fragments continue to de-excite by emitting a cascade of $\gamma$ rays.
+\end{enumerate}
+This entire process occurs over a very brief time scale $\sim 10^{-12}$~seconds. However, the resulting fragments are very neutron rich relative to the line of stability. These will undergo $\beta^-$ decay over a time range spanning microseconds to millions of years. Some of the more neutron rich ones can have $\beta^-$ decays with a high enough $Q$ value to emit more neutrons called delayed neutrons that are very important to the operation of the reactor. In either case, these decays release a significant amount of heat that needs to be removed from the reactor lest the fuel melt. On longer time scales, even after the thermal output of the fragments has diminished, they still remain radiologically toxic enough to require isolation from the environment for an extended period of time.
+
+Once scission occurs, the $Q$ value has a range of 160-200~MeV depending on the fragments. Most of this goes into the kinetic energy of the fragments and is immediately converted into heat. Typically about 20-30~MeV is goes into the excitation energy, which quickly gets converted into the kinetic energy of neutrons and photons. About another 20~MeV is released from the $\beta^-$ decay. Part of this is converted to thermal energy via slowing down of the fast electrons produced in the reaction and the remainder is carried far away (mostly into outer space) via neutrinos. Taken together, the total energy recoverable from fission is on the order of 200~MeV with about 180~MeV being released immediately.
+
+\subsection{Multiplicity}
+
+From our earlier discussion, other than heat, there are two outputs from the fission fragments: neutrons and photons. The former of these is most pertinent to establishing a self-sustaining chain reaction and making a nuclear reactor possible. Both the neutrons and photons also deposit energy non-locally from the site of fission and needs to be accounted for in the overall thermal energy balance of the reactor, even though it is a relatively small percentage of the overall energy released from fission (about 6\%).
+
+The neutron emission can be calculated using quantum scattering calculations of the $S$-matrix that enumerates the transitions from the current excited state to all possible states after neutron emission. These calculations ultimately result in transmission coefficients or neutron emission probabilities. There is also competition with $\gamma$ emission that occurs. The probabilities can be calculated using the nuclear transition of selection rules with E1 and M1 transitions usually being dominant. The general trend is that at high energies well above the neutron separation energy, neutron emission dominates with $\gamma$ emission becoming more probable with decreasing energy. These calculations are done for all possible fragmentation pathways and result in both neutron and photon multiplicities and spectra, and we will discuss the former now.
+
+The neutron multiplicity can be described by a discrete probability distribution
+\begin{align}
+  p(n|E) = 	&\text{ the probability that $n$ neutrons are emitted from fission } \\
+  			&\text{ caused by a neutron having kinetic energy $E$.} \nonumber 
+\end{align}
+Here $n$ is random and $E$ is given. Unfortunately, this data is only available for a select few set of isotopes and not very many neutron energies. Thankfully, for reactors, we rarely care about the microscopic details of fission and only care about what happens on average. Therefore, we can define the mean fission multiplicity as
+\begin{align}
+  \nu(E) = \sum_n n p(n|E).
+\end{align}
+This value $\nu(E)$ is what is provided in nuclear data libraries. In general, the energy dependence of $\nu(E)$ is fairly weak until the incident neutrons have an energy of a few MeV and up. Fortunately, most neutrons in a fission reactor have energies of about 2~MeV or less, so this energy dependence is not a major effect. For thermal neutrons on $^{235}$U, the mean multiplicity is about 2.45, which is a good number to keep in the back of your mind.
+
+In the equations describing the reactor, the mean neutron multiplicity is always multiplied by the fission cross section. Therefore, we define
+\begin{align}
+  \nu \sigma_f(E) = 	&\text{ microscopic fission neutron production cross section} \nonumber \\
+  						&\text{ for a neutron with incident kinetic energy $E$.} \nonumber 
+\end{align}
+when multiplied by the number density, we get the macroscopic version
+\begin{align}
+  \nu \Sigma_f(E) 	= 	&\ \nu N \sigma_f(E) \nonumber \\
+  					=	&\text{ expected number of neutrons produced from fission per} \nonumber \\
+  						&\text{ unit length for a neutron with kinetic energy $E$.} \nonumber 
+\end{align}
+
+Likewise, we can define the multiplicity for $\gamma$ rays, often given by $\nu_\gamma$ or $N_\gamma$ and bundled into a photon-production cross section that includes photons from radiative capture reactions. Typically about 8 photons on average are emitted per fission.
+
+\subsection{Spectra}
+
+Each of the neutrons and gammas emerge from de-excitation of the fission fragments with different energies with random directions that are equiprobable. Because of the sheer number of excited states and possible transitions, these are effectively continuous spectra. We define the neutron spectrum as
+\begin{align}
+  \chi(E) dE = 	&\text{ probability that a neutron emitted from fission } \nonumber \\
+  				&\text{ will have an energy between $E$ and $E + dE$.} \nonumber
+\end{align}
+This spectrum includes both neutrons emitted during the prompt de-excitation as well as those that arise later during $\beta^-$ decay. Typical neutron energies from prompt fission are between 1-2~MeV, but occasionally are emitted with energies of several MeV and seldom much above 10 MeV. Neutrons from $\beta^-$ decay tend to be lower in energy having energies typically in the range of a few 100 keV. Like the neutron multiplicity, the fission spectra are only weak functions of the incident neutron energy in the energy ranges of interest and can often be ignored in the analysis of nuclear fission reactors.
+
+There is a similar spectrum for the $\gamma$ particles, $\chi_\gamma(E)$. Typically photon energies are higher than neutrons, and are typically on the order of a few MeV.
+
+\subsection{Product Yields}
+
+Nuclear fission converts a fissionable nucleus into two fragment nuclei called fission products. As mentioned, these fragments are typically quite radioactive and undergo decay producing heat and converting into other isotopes. Certain fission products have a significant impact on the operation of a nuclear reactor. The most important are $^{135}$Te and $^{135}$I, which are in a chain that decay to $^{135}$Xe. This xenon isotope has an extremely large thermal capture cross section that has a major impact on the chain reaction and needs to be considered in the design. Another smaller contribution comes from the creation of $^{149}$Pm and its decay product $^{149}$Sm, which also has a high capture cross section. These two isotopes $^{135}$Xe and $^{149}$Sm are referred to as fission product poisons because of there impact. Other fission products are important for reactor design because of their chemical reactivity, which can impact cladding, or for the buildup of fission product gasses in the cladding.
+
+The yield of a particular fission product $i$ is characterized by
+\begin{align}
+  \gamma_i(E) = 	&\text{ the expected number of fission fragments $i$ produced per} \nonumber \\
+  					&\text{ fission from a fission with incident neutron energy $E$.} \nonumber
+\end{align}
+Because there are two fragments per fission, we have
+\begin{align}
+  \sum_i \gamma_i(E) = 2. \nonumber
+\end{align}
+These fission product yields are available in a nuclear data library. For some isotopes, they are available as a function of energy. Similar to the neutron multiplicity and spectra, these yields only become a function of energy when the incident energy is higher. For thermal reactor analysis, it is usually sufficient to treat all fissions as having the same fission product yield.
+
+The fission product yield spectrum as a function of atomic mass number tends to be bimodal or double-humped. A typical fission therefore has light and heavy fragments, with an even split being quite rare. The reason for this because nuclei prefer to have filled nuclear shells. Specifically, the presence of doubly magic $^{132}$Sn on the chart of nuclides pushes one of the fragments toward grabbing more nucleons and attempting to form it at the expense of the other, even though actually creating the isotope itself from fission is quite difficult and rare.
+
+\subsection{Delayed Neutrons} \label{Sec:nuclearData_delayedNeutrons}
+
+The fission products that are created from fission tend to be very neutron rich. Some of these have so many excess neutrons that their $\beta^-$ $Q$ values are large enough so that the product is left in a excited state with an excitation energy that exceeds its neutron separation energy. In this case, it becomes energetically favorable to de-excite through neutron emission. Whereas the neutrons emitted immediately from fission are effectively instantaneous, the emission of these $\beta^-$-decay induced neutrons are on a relatively much longer time scale, ranging from milliseconds to minutes. Therefore we call these neutrons \emph{delayed neutrons}. While the number of these neutrons is relatively small (fewer than 1\%), their longer time scales is crucial to the safe operation of a nuclear reactor. This provides us with a humanly possible time window to control the reactor. If not for them, controlled nuclear fission power would likely be impossible.
+
+We quantify these delayed neutrons using the delayed neutron fraction $\beta(E)$. For an incident neutron with energy $E$,
+\begin{align}
+  \beta(E) = \ \frac{\text{expected number of delayed neutrons produced per fission}}{\text{expected number of neutrons produced per fission}} . \nonumber
+\end{align}
+Here the energy dependence arises because of the energy dependence on fission product yields, which tends to vary weakly with energy. The average number of delayed neutrons per fission is therefore $\beta \nu$ and the number of prompt neutrons is therefore $(1 - \beta)\nu$. For $^{235}$U, the value of the delayed neutron fraction is about 0.65\%; $^{239}$Pu is about 0.23\% and $^{233}$U is about 0.27\%.
+
+We refer to the fission products that produce these delayed neutrons as \emph{delayed neutron precursors}. There are numerous such fission products and it would be very difficult to attempt to try to get accurate measurements of their half lives and decay energies. To avoid these difficulties, we group these precursors by their decay times into delayed neutron precursor groups. Traditionally there are six delayed neutron precursor groups. This number was chosen specifically to minimize the experimental measurements that were done in the late 1940s. The use of six delayed neutron groups continues to this day, at least in the United States. In some nuclear libraries, there are eight precursor groups. This number was chosen so that each group has a single dominant fission fragment. Here we will use the six-group format to keep with traditions, as there is no major benefit in terms of end result as to whether six or eight delayed neutron groups are used.
+
+Each delayed neutron precursor group has a representative (average) decay constant,
+\begin{align}
+  \lambda_i = \text{ effective decay constant for delayed neutron precursor group $i$.} \nonumber
+\end{align}
+The most important of these is the longest-lived delayed neutron precursor group. Typically this contains a single, unusually long-lived fission product $^{87}$Br, which has a half-life of 55.7~seconds. It is this very important fission product that essentially restricts the rate that a nuclear reactor can be shutdown---one cannot rush the production of neutrons from delayed neutrons.
+
+Each group also has a relative fraction
+\begin{align}
+ \beta_i(E) = \ \frac{\text{number of delayed neutrons from precursor group $i$ per fission}}{\text{number of neutrons per fission}} . \nonumber
+\end{align}
+The relative fractions fractions always sum to the total
+\begin{align}
+  \beta(E) = \sum_i \beta_i(E). 
+\end{align}
+Each delayed neutron group emits neutrons equiprobably in direction with a characteristic energy spectrum:
+\begin{align}
+  \chi_i(E) dE = 	&\text{ probably that a neutron from delayed neutron precursor group $i$} \nonumber \\
+  					&\text{ is emitted with an energy between $E$ and $E + dE$.} \nonumber
+\end{align}
+If $\chi_p(E)$ is the prompt fission spectrum, then the overall fission spectrum is the weighted average of the prompt neutrons and each delayed neutron precursor group:
+\begin{align}
+  \chi(E) = ( 1 - \beta ) \chi_p(E) + \sum_i \beta_i \chi_i(E).
+\end{align}
+Here we neglected the incident neutron energy dependence of the delayed neutron fraction.
+
+\subsection{Higher-Chance Fission}
+
+If we inspect the fission cross section for $^{235}$U, there is a sudden jump at about 6~MeV and a smaller one at around 12~MeV. While these sudden increases in the fission cross section are of minor importance to nuclear fission reactors, they are worth discussing because they do connect with the physics of the fission process. The 6~MeV energy corresponds to the neutron separation energy of the $^{236}$U compound nucleus. A neutron can always get captured and fail to cause fission; however, if enough kinetic energy was added by the incident neutron, a neutron can be emitted (via inelastic scattering) and then re-excite the nucleus and give the resulting product ($^{235}$U in our example) another chance to cause fission. If the incident neutron kinetic energy is sufficiently high, then there can be multiple chances of fission, which explains the sudden increase in the cross section.
+
+We therefore refer to the case where a neutron causes fission directly to be first-chance fission. The case where there is a neutron emission and fission upon re-excitation is called second-chance fission. The case for two neutrons emitted before causing fission is third-chance fission and so on. The fission cross section is therefore the sum of all chances,
+\begin{align}
+  \sigma_f(E) = \sigma_{f1}(E) + \sigma_{f2}(E) + \ldots
+\end{align}
+Again, it is uncommon to have a neutron energetic enough to cause second-chance fission in a nuclear reactor.
+
+\subsection{Ternary Fission}
+
+Normally fission creates two fragments with a light and heavy fragment. About 0.2-0.4\% of fissions results in the production of a third, light ion fragment. This relatively rare event is called \emph{ternary fission}. Because a power reactor has a very large number of fissions occurring over its lifetime, the number of these fissions, while infrequent, will also be quite large. Why ternary fission matters is because two of the common isotopes produced are tritium and helium-4 $\alpha$ particles. 
+
+Tritium is a radioactive isotope of hydrogen that is highly permeable and will transport out of the nuclear fuel, through the cladding, and into the coolant to form tritated water. The presence of tritium in the water means the coolant becomes radiotoxic and it is infeasible to chemically separate it from regular water. Ternary fission therefore becomes a source of radiotoxicity that must be managed during the operation of a nuclear power reactor.
+
+While helium is chemically inert, $^4$He is particularly nonreactive from a nuclear perspective as well. The production of $^4$He from ternary fission will build up as a gas within the cladding of the nuclear fuel. The cladding must be designed to withstand the additional gas pressure that builds up from it and other fission product gasses that are created.
+
+
+\section{Scattering}
+
+We already spent a bit of time discussing scattering from a quantum perspective and the derived a form for the (elastic) scattering cross section in terms of the Breit-Wigner model in Eq.~\eqref{Eq:nuclearData_breitWignerElasticXS}. In this section, we will summarize results and expand upon them. There are two types of scattering with free nuclei, elastic and inelastic. In thermal nuclear reactors, elastic scattering is of major importance, whereas inelastic scattering must be considered in the analysis, but it is a secondary consideration. Another aspect that we have not discussed is the impact of chemical binding on low-energy neutron interactions. Previously, we implicitly assumed the nucleus is an object disconnected from the rest of the universe. Of course, nuclei are within atoms and these atoms are typically chemically bound to surrounding atoms in either a solid or liquid, and this impacts the neutron interactions at low energies.
+
+\subsection{Elastic Scattering Energy Transfer}
+
+When neutrons collide with nuclei, they transfer some of their kinetic energy. Through subsequent collisions, neutrons produced from fission with energies of 1-2~MeV slow down and thermalize at energies of around 25~meV. This process is called neutron moderation, and elastic scattering is the primary physical mechanism by which this occurs. Recall that in elastic scattering the $Q$ value of the reaction is zero and no energy is transferred to the internal structure of the nucleus. In this section we will make two assumptions. The first is that the target is stationary and we can ignore the effect of thermal motion. The second is that the scattering process is isotropic, equally probable in all directions, in the \emph{center of mass frame}. We will relax the first assumption in the next section. The second assumption is valid for either most light nuclei or for heavy nuclei at low incident neutron kinetic energies. We expect this from our analyses from quantum mechanics, which occurred in the center-of-mass frame.
+
+The energy transfer distribution for elastic scattering under these assumptions is simply a uniform distribution. If $E'$ is the incident neutron energy and $E$ is the outgoing energy, then the energy transfer probability density is
+\begin{align} \label{Eq:nuclearData_elasticStationaryEnergyTransfer}
+  p(E' \rightarrow E ) = \left\{ \begin{array}{l l}
+  \dfrac{1}{1 - \alpha} \dfrac{1}{E'}, 	& \quad \alpha E' \le E \le E', \\
+  0,									& \quad \text{otherwise}. \end{array} \right.
+\end{align}
+Here the outgoing energy $E$ is random and the incident energy $E'$ is given. The parameter $\alpha$ is called the scattering parameter and related to the mass of the target nucleus. It is
+\begin{align}
+  \alpha = \left( \frac{A-1}{A+1} \right)^2 .
+\end{align}
+
+Note that for hydrogen, $A$ is very close to one, so we often set it as such in our analysis. This implies $\alpha = 0$ for hydrogen. Based on the energy transfer probability density function, we see that the energy range goes from the incident energy $E'$ down to zero. This means that it is possible for a neutron to essentially transfer all of its kinetic energy in a hydrogen-atom collision. This is not possible for heavier nuclei. This property makes water an good choice for a moderator in addition to being an inexpensive and effective coolant. 
+
+We will not dwell on this topic further for now, as we will discuss this in great detail once we get to the topic of neutron slowing down and spectrum calculations. 
+
+\subsection{Elastic Scattering Direction Change}
+
+A neutron changes direction in an scattering reaction in the lab frame. If the incident direction of the neutron is given by $\dir'$ and the outgoing direction is $\dir$, we can characterize the change in the direction using the angles $\theta_0$ and $\gamma_0$. Here $\theta_0$ is called the scattering (polar) angle and $\gamma_0$ is the azimuthal angle. Because of spherical symmetry of the nuclear potential, we can treat $\gamma_0$ as uniformly distributed, i.e., any outgoing azimuthal angle is equally likely. The outgoing scattering angle $\theta_0$, however, is not generally uniform.
+
+It is most convenient to work with the cosine of the scattering angle
+\begin{align}
+  \mu_0 = \cos\theta_0 = \dir' \cdot \dir ,
+\end{align}
+and to describe the change in direction in the lab frame with a probability density function $p(\mu_0)$ or the differential scattering cross section,
+\begin{align}
+  \frac{d\sigma_s}{d\Omega} = \sigma_s( E, \dir' \cdot \dir ) = \frac{1}{2\pi} \sigma_s(E) p(\mu_0).
+\end{align}
+Here the factor of $1/2\pi$ is from the uniform azimuthal dependence.
+
+Here we are assuming that the scattering is isotropic in the center-of-mass frame, but this is not true about the lab frame. Let $\mu_{cm}$ be the cosine of the scattering angle in the center-of-mass frame. Its probability density is then
+\begin{align}
+  p(\mu_{cm}) = \frac{1}{2}, \quad -1 \le \mu_{cm} \le 1.
+\end{align}
+Fortunately, we can relate the scattering cosines in the lab and center-of-mass frames for elastic scattering using conservation of energy and momentum. The result is
+\begin{align} \label{Eq:nuclearData_LabFrameCosine_COMFrameCosine}
+  \mu_0 = \frac{ 1 + A \mu_{cm} }{ \sqrt{ A^2 + 2 A \mu_{cm} + 1 } } .
+\end{align}
+Note that this relationship is generally valid for elastic scattering, even if the scattering is not isotropic in the center-of-mass frame. Using a similar analysis, we can also derive a relationship between the outgoing energy and the center-of-mass scattering cosine given an incident energy $E'$. This is
+\begin{align}
+  E = \frac{E'}{2} \left[ ( 1 - \alpha ) \mu_{cm} + ( 1 + \alpha ) \right] .
+\end{align}
+This relationship is also valid regardless of whether or not the scattering is isotropic in the center-of-mass frame. 
+
+From these, we can relate the lab-frame scattering cosine to the incident and outgoing energies,
+\begin{align}
+  \mu_0 = \left( \frac{A+1}{2} \right) \sqrt{\frac{E}{E'}} - \left( \frac{A-1}{2} \right) \sqrt{\frac{E'}{E}} .
+\end{align}
+We can plug in the maximum and minimum outgoing energies, $E'$ and $\alpha E'$ respectively. For hydrogen, $A = 1$ and $\alpha = 0$, we see that the range of lab-frame scattering cosines are 0 to 1. (The second term is zero.) In other words, it is impossible for a neutron to backscatter off of hydrogen. For any $A > 1$, we can see that scattering in any direction is possible. 
+
+We can use this result to obtain the mean cosine of the scattering angle,
+\begin{align}
+  \overline{\mu}_0 
+  &= \int_0^\infty \mu_0(E) p(E' \rightarrow E ) dE \nonumber \\ 
+  &= \int_{\alpha E'}^{E'} \frac{1}{1 - \alpha} \frac{1}{E'} \left[  \left( \frac{A+1}{2} \right) \sqrt{\frac{E}{E'}} - \left( \frac{A-1}{2} \right) \sqrt{\frac{E'}{E}} \right] dE \nonumber \\
+  &= \frac{2}{3A} .
+\end{align}
+This is a surprisingly simple result. For hydrogen, on average the mean scattering cosine is $2/3$ corresponding to an angle of 48.2$^\circ$. As $A$ becomes large, the mean scattering cosine tends toward zero. For heavy nuclei, the scattering in the lab frame is nearly isotropic. This conclusion holds so long as the scattering is isotropic in the center-of-mass frame, which is true for low energies.
+
+Since hydrogen is a very important moderator in nuclear reactors, we should probably derive its scattering cosine distribution in the lab frame. Using Eq.~\eqref{Eq:nuclearData_LabFrameCosine_COMFrameCosine} with $A = 1$, we can easily relate the two scattering cosines,
+\begin{align}
+  \mu_{cm} = 2 \mu_0^2 - 1, \quad A = 1. \nonumber
+\end{align}
+From here, we can obtain the lab-frame scattering cosine distribution for hydrogen,
+\begin{align}
+  p(\mu_0) = p(\mu_{cm}) \left| \frac{d\mu_{cm}}{d\mu_0} \right| = \frac{1}{2} | 4 \mu_0 | 
+  = \left\{ \begin{array}{l l}
+  2 \mu_0 , & \quad 0 \le \mu_0 \le 1, \\
+  0,		& \quad \text{otherwise}. \\ \end{array} \right.
+\end{align}
+This function is zero for backward directions, which we expect from our previous result, and increases linearly with the scattering cosine.
+
+\subsection{Legendre Moments}
+
+From our discussion, we saw how scattering in the lab frame is anisotropic in the lab frame despite being mostly isotropic in the center-of-mass frame. Because we live in and analyze nuclear reactors in the lab frame, we need to keep track of the angular scattering distribution. As we mentioned before, the Legendre moments provide a convenient and compact representation. Recall that the differential scattering cross section in angle can be expanded as
+\begin{align}
+  \frac{d\sigma_s}{d\Omega} = \frac{1}{2\pi} \sigma_s(E,\mu_0) = \frac{1}{2\pi} \sum_{\ell=0}^\infty \left( \frac{2\ell + 1}{2} \right) \sigma_{s\ell}(E) P_\ell(\mu_0) .
+\end{align}
+
+In thermal reactors, it is often sufficient to just handle the zeroth and first Legendre moments of the scattering cross section. The zeroth moment corresponds to the scattering cross section itself. This can be shown by integrating the differential scattering cross section over all angles:
+\begin{align}
+   \int_0^{2\pi} \int_{-1}^1 \frac{1}{2\pi} \sigma_s(E,\mu_0) d\mu_0 d\gamma_0 &= 
+   \int_0^{2\pi} \int_{-1}^1 \frac{1}{2\pi} \sum_{\ell=0}^\infty \left( \frac{2\ell + 1}{2} \right) \sigma_{s\ell}(E) P_\ell(\mu_0) d\mu_0 d\gamma_0 , \nonumber \\
+   \int_{-1}^1 \sigma_s(E) p(\mu_0) d\mu_0 &= \int_{-1}^1 \sum_{\ell=0}^\infty \left( \frac{2\ell + 1}{2} \right) \sigma_{s\ell}(E) P_\ell(\mu_0) d\mu_0 , \nonumber \\
+    \sigma_s(E) \int_{-1}^1  p(\mu_0) d\mu_0 &=  \sum_{\ell=0}^\infty \left( \frac{2\ell + 1}{2} \right) \sigma_{s\ell}(E) \int_{-1}^1 P_\ell(\mu_0) P_0(\mu_0) d\mu_0 , \nonumber \\  
+    \sigma_s(E) &= \sigma_{s0}(E)  .
+\end{align}
+Here we used a few identities. First, on the left-hand side we used the fact that integrating a probability density over all possible values gives one,
+\begin{align}
+  \int_{-1}^1 p(\mu_0) d\mu_0 = 1 ; \nonumber
+\end{align}
+we multiplied by $P_0(\mu) = 1$ on the right-hand side; and we used the orthogonality property of Legendre polynomials,
+\begin{align}
+  \int_{-1}^1 P_\ell(\mu_0) P_m(\mu_0) d\mu_0 = \frac{ 2 }{ 2 \ell + 1 } \delta_{\ell m} . \nonumber
+\end{align}
+
+We can similarly show that the first Legendre moment of the differential scattering cross section $\sigma_{s1}(E)$ is related to the mean scattering cosine $\overline{\mu}_0$. This is done by taking the differential scattering cross section, expanding it in Legendre polynomials, multiplying both sides by $\mu_0$, and integrating:
+\begin{align}
+   \int_{-1}^1 \sigma_s(E) \mu_0 p(\mu_0) d\mu_0 &= \int_{-1}^1 \sum_{\ell=0}^\infty \left( \frac{2\ell + 1}{2} \right) \sigma_{s\ell}(E) P_\ell(\mu_0) \mu_0  d\mu_0 , \nonumber \\
+    \sigma_s(E) \int_{-1}^1  p(\mu_0) d\mu_0 &=  \sum_{\ell=0}^\infty \left( \frac{2\ell + 1}{2} \right) \sigma_{s\ell}(E) \int_{-1}^1 P_\ell(\mu_0) P_1(\mu_0) d\mu_0 , \nonumber \\  
+    \sigma_s(E) \overline{\mu}_0 &= \sigma_{s1}(E)  .
+\end{align}
+Here we used $P_1(\mu_0) = \mu_0$, again applied orthogonality of the Legendre polynomials, and used the definition of the mean of a probability density function,
+\begin{align}
+  \int_{-1}^1 \mu_0 p(\mu_0) d\mu_0 = \overline{\mu}_0 . \nonumber
+\end{align}
+If scattering is isotropic in the center-of-mass frame, then we can relate the first Legendre moment to the scattering cross section by
+\begin{align}
+  \sigma_{s1}(E) = \frac{2}{3A} \sigma_{s0}(E) .
+\end{align}
+
+\subsection{Inelastic Scattering}
+
+As mentioned before, inelastic scattering is of secondary importance to the analysis of thermal nuclear fission reactors. The physics also gets a bit more complicated. For these reasons, we are not going to spend too much time on the topic. However, we should at least discuss it briefly.
+
+Nuclear inelastic scattering occurs when the neutron gets captured to form a compound nucleus with usually a different neutron getting emitted and leaving the nucleus in an excited state. The resulting nucleus usually de-excites by emitting a $\gamma$ ray. At lower energies for heavy nuclei, this usually involves exciting some nuclear vibrational mode after the neutron is emitted. For lighter nuclei and at higher energies, it is possible to impart enough energy to cause a rearrangement of the neutrons and protons in the nucleus into a higher energy state. Because this excitations occur at discrete levels, there is an energy threshold corresponding to a negative $Q$ value for the reaction. A neutron must have at least the energy of that nuclear level to cause that particular excitation. At sufficiently high energy, the nuclear levels blend together into an inelastic continuum where more complicated dynamics can come into play.
+
+Typically inelastic scattering is represented as inelastic level and inelastic continuum scattering. The former has a well-characterized $Q$ value along with an angular distribution that is often not isotropic in the center-of-mass frame, $p(\mu_{cm})$. The outgoing energy is determined in two steps. First, we can find the outgoing energy in the center-of-mass frame given incident energy $E'$ and the $Q$ value,
+\begin{subequations}
+\begin{align}
+  E_{cm} = \left( \frac{A}{A+1} \right)^2 \left[ E' -  \left( \frac{A+1}{A} \right) |Q| \right] ,
+\end{align}
+and then, given this and the scattering cosine in the center-of-mass frame, the outgoing energy in the lab frame is
+\begin{align}
+  E = E_{cm} + \frac{ E' + 2 \mu_{cm} ( A + 1 ) \sqrt{ E' E_{cm} } }{ ( A + 1 )^2 } .
+\end{align}
+\end{subequations}
+
+The outgoing energy and direction cosine for continuum inelastic scattering is typically described using tabular data in a nuclear cross section library. Often these can be described using a compact representation called the Kallbach-Mann systematics. The outgoing energy distributions $p(E' \rightarrow E)$ are given in the tables at various incident energies $E'$. For an outgoing energy, the probability density function for the outgoing neutron in the center-of-mass frame is given by
+\begin{align}
+  p(\mu_{cm}) = \frac{A}{2 \sinh(A) } \left[ \cosh(A\mu_{cm}) + R \sinh(A\mu_{cm}) \right],
+\end{align}
+where $A$ and $R$ are tabular data that depend on the outgoing energy $E$.
+
+\subsection{Multiplicity (n,xn) Reactions}
+
+At higher neutron energies, reactions such as (n,2n) are possible. These multiplicity reactions are typically lumped in with scattering reactions. Usually the magnitude of the $Q$ value is several MeV, which is too high to be relevant in nuclear fission reactors and can mostly be ignored. 
+
+There is one notable exception: beryllium, which is light and has a low thermal capture cross section, making it an excellent moderator and neutron reflector. Because of beryllium's chemical toxicity it is rarely used, except in specialized missions like space reactors. The $Q$ value for the $^9$Be (n,2n) reaction is about -1.6~MeV, which makes it within the fission energy range. The magnitude of the cross section is also on the same order as other fast cross sections. So while the effect of (n,2n) for systems containing a large quantity of $^9$Be is fairly small, it is not insignificant.
+
+\subsection{Chemical Binding Effects}
+
+When neutrons slow down to energies of a few eV or less, the chemical binding between the atoms can have a major impact on the neutron scattering interactions. These effects are particularly important in light nuclei, with hydrogen, deuterium, beryllium, and carbon (graphite) being particularly relevant because of their role as neutron moderators. For example, a neutron scattering off hydrogen in a light-water molecule interacts differently than it would if it were a free hydrogen atom. Chemical binding both impacts the cross section itself and the energy-direction transfer physics, and these data are often found in special thermal scattering law or TSL libraries. Often, these data are referred to as $S(\alpha,\beta)$ libraries, which is the function encoding the inelastic scattering dynamics, but let's not get ahead of ourselves.
+
+The chemical binding effects come from two sources. The first is neutron diffraction. At low energies, the neutron wavelength is on the same order as the inter-atomic spacing within the crystalline structure of a solid. When a neutron hits a randomly oriented crystal grain in a solid just right, the neutron will scatter elastically off that entire crystal grain for the same reason light undergoes diffraction. Because the crystal grains are quite small (micrometer scale) and the neutron traverses centimeters between collisions, the probability of it encountering such a grain is significant. Because the grain consists of billons of atoms, its mass is effectively infinite relative to that of a neutron and there is no measurable energy transfer.
+
+The neutron diffraction cross sections are often referred to as \emph{elastic coherent scattering} cross sections and given by $\sigma_{coh}(E)$. These have a characteristic shape of having numerous sharp edges where with increasing energy, the cross section suddenly jumps with the overall behavior being quite jagged. These jumps are called Bragg edges and denote points where an integer number of neutron wavelengths matches the interatomic spacing.
+
+The second chemical binding effect is called $S(\alpha,\beta)$ or \emph{inelastic incoherent scattering}. Note that this different than inelastic nuclear scattering. Here the neutron transfers part of its kinetic energy and excites the chemical bonds in a solid lattice or excites some vibrational or rotational mode of a molecule. Because chemical binding energies are a few eV or less, inelastic neutron scattering becomes possible.
+
+To describe this, we first define $\alpha$ and $\beta$ as dimensionless momentum and energy transfer variables,
+\begin{subequations}
+\begin{align}
+  \alpha &= \frac{ E' + E - 2 \mu_0 \sqrt{ E E' } }{ A k_B T }, \\
+  \beta  &= \frac{ E - E' }{ k_B T } .
+\end{align}
+\end{subequations} 
+Here $T$ is the material temperature and $k_B$ is the Boltzmann constant. The quantity $k_B T$ represents the thermal energy within the material. The double-differential inelastic incoherent scattering cross section can then be described as a function of $\alpha$ and $\beta$ as
+\begin{align} \label{Eq:nuclearData_generalDDXS_Salphabeta}
+  \sigma_{inc}(E' \rightarrow E, \dir' \cdot \dir ) = \frac{ \sigma_p }{ 4\pi } \left( \frac{ A + 1 }{ A } \right)^2 \frac{ e^{-\beta/2} }{ k_B T } \sqrt{\frac{E}{E'}} S(\alpha,\beta) .
+\end{align}
+Here $\sigma_p$ is the potential scattering cross section and $S(\alpha,\beta)$ encodes all the complicated physics and is called the scattering law, which is what is provided in the nuclear data library and is particular to the compound of interest. 
+
+This double-differential scattering cross section is integrated over all outgoing energies and direction changes to get the overall inelastic incoherent thermal scattering cross section, which often differs significantly from the elastic scattering cross section that we would use for a free atom. The resulting inelastic thermal cross section, unlike the elastic coherent scattering cross section, tends to be quite smooth. The overall scattering cross section is the sum of the two
+\begin{align}
+  \sigma_s(E) = \sigma_{coh}(E) + \sigma_{inc}(E).
+\end{align}
+As the energy increases into the few eV range, the effects of chemical binding diminish and approaches the free-atom scattering cross sections that we discussed previously. 
+
+\section{Thermal Motion Effects}
+
+Until now we assumed the nuclei that neutrons interact with are stationary. This assumption breaks down when neutron velocities become on the same order as the velocities of these nuclei. Specifically cross section depends on the neutron kinetic energy corresponding to the relative velocity between the incident neutron and the target nucleus. The complication that arises is that the velocities of the nuclei that the neutrons encounter are not described by one value, but rather a random distribution. Therefore, our cross sections need to be weighted by the probability of a neutron encountering each velocity.
+
+\subsection{Maxwell-Boltzmann Distribution}
+
+The velocities of particles in thermodynamic equilibrium are described by a Maxwell-Boltzmann distribution. The velocity in each independent direction $(V_x,V_y,V_z)$ is described by a normal distribution. The distribution for the speed can then be written as
+\begin{align}
+  M(\mathbf{V},T) dV_x dV_y dV_z 
+  = \left( \frac{ A m_n }{ 2 \pi k_B T } \right)^{3/2} \exp \left( -\frac{ A m_n V^2 }{ 2 k_B T } \right) dV_x dV_y dV_z
+\end{align}
+where the speed is
+\begin{align}
+  V = \sqrt{ V_x^2 + V_y^2 + V_z^2 } .
+\end{align}
+This can expressed in spherical coordinates in terms of the speed $V$ as
+\begin{align}
+  M(V,\mu,\gamma,T) V^2 dV d\mu d\gamma 
+  = \left( \frac{Am_n}{2\pi k_B T} \right)^{3/2} \exp \left( -\frac{ A m_n V^2 }{ 2 k_B T } \right) V^2 dV d\mu d\gamma.
+\end{align}
+Here $V^2 dV d\mu d\gamma$ is a 3-D differential velocity element analogous to a differential volume element. Here $\mu$ is the cosine of the angle between the nucleus an arbitrary polar axis, which is usually chosen as the incident neutron direction, and $\gamma$ is the azimuthal angle about that axis.
+
+This distribution can be transformed to be in terms of the kinetic energy of the nucleus. Performing the variable transformation,
+\begin{align}
+  E &= \frac{1}{2} A m_n V^2, \nonumber \\
+  dE &= A m_n V dV . \nonumber
+\end{align}
+and integrating out the $\mu$ and $\gamma$ variables gives
+\begin{align}
+  M(E,T) dE 
+  = &\frac{2}{\sqrt{\pi} k_B T} \sqrt{ \frac{E}{k_B T} } \exp \left( -\frac{ E }{ k_B T } \right) dE.
+\end{align}
+
+We assume that the velocities of the background nuclei are distributed approximately with the Maxwell-Boltzmann distribution. In reality, in a solid, for example, the velocities in some directions could be inhibited by chemical bonds. Fortunately, for temperatures that are not too low, those well in excess of the Debye temperature, the assumption is a very good one. This applies for most materials we encounter in reactor analysis for room temperature and above.
+
+\subsection{Thermally Averaged Cross Sections}
+
+Let's suppose we have a population density $n$ of neutrons in volume $d\Gamma$ (sorry, too many things would use the letter $V$ otherwise) all having a speed $v$ with corresponding kinetic energy $E$. Suppose these neutrons encounter a bunch of nuclei within this same differential volume that all have a velocity $\mathbf{V}$ with atomic density $N$. The interaction rate is related to the relative speed between each neutron and the nucleus,
+\begin{align}
+  | \mathbf{v} - \mathbf{V} | = \sqrt{ v^2 + V^2 - 2 v V \mu } ,
+\end{align}
+where $v$ and $V$ are the respective neutron and nucleus speeds and $\mu$ is the cosine of the angle between their velocity vectors, by way of the nuclear cross section as
+\begin{align}
+  | \mathbf{v} - \mathbf{V} | N \sigma_t( | \mathbf{v} - \mathbf{V} | ) n( v ) d\Gamma = 
+  &\text{ interactions per unit time for neutrons with speed $v$ } \nonumber \\*
+  &\text{ encountering nuclei with velocity $\mathbf{V}$ within  } \nonumber \\*
+  &\text{ differential volume $d\Gamma$.} \nonumber
+\end{align}
+Of course, not all nuclei are not normally moving with the same velocity $\mathbf{V}$, but rather have velocities distributed by the Maxwell-Boltzmann distribution. Therefore, we have a to define the average cross section by multiplying this expression by $M(\mathbf{V})$ and integrating over all neutron velocities $\mathbf{V}$:
+\begin{align}
+  &\int_{-\infty}^\infty \int_{-\infty}^\infty  \int_{-\infty}^\infty | \mathbf{v} - \mathbf{V} | N \sigma_t( | \mathbf{v} - \mathbf{V} | )  M(\mathbf{V},T) dV_x dV_y dV_z n( v ) d\Gamma = \nonumber \\*
+  &\text{ interactions per unit time for neutrons with speed $v$ encountering nuclei with a } \nonumber \\*
+  &\text{ Maxwell-Boltzmann distribution of velocities $\mathbf{V}$ with temperature $T$  } \nonumber \\*
+  &\text{ within a differential volume $d\Gamma$.} \nonumber 
+\end{align}
+We can equate this reaction rate in the above expression with an effective cross section $\sigma_t(E,T)$ 
+\begin{align}
+   v N \sigma_t(E,T) n(v) d\Gamma \nonumber .
+\end{align}
+Dividing out the common terms, we arrive at an expression for our effective cross section:
+\begin{align} \label{Eq:nuclearData_thermalAveragedXS}
+  \sigma(E,T) = \frac{1}{v} \int_{-\infty}^\infty \int_{-\infty}^\infty  \int_{-\infty}^\infty \tilde{\sigma}(|\mathbf{v} - \mathbf{V}|) | \mathbf{v} - \mathbf{V} | M(\mathbf{V},T) dV_x dV_y dV_z .
+\end{align}
+Here we renamed the cross section in the integral as $\tilde{\sigma}$ is the target-at-rest (zero temperature) cross section evaluated at the relative neutron-nucleus speed. We also took off the subscript, since this applies to any reaction.
+
+The two neutron reactions that are most relevant at the energy ranges of interest are capture, fission, and scattering. The first two have very similar functional forms, having a $1/v$ background with resonances. Scattering has a constant background with a slightly more complicated resonance structure. In this section we will address the background cross sections and then handle resonances.
+
+For the case of a $1/v$ background, we have the zero-temperature cross section as
+\begin{align}
+  \tilde{\sigma}_\gamma(E) = \tilde{\sigma}_\gamma(v) = \frac{ C }{ v },
+\end{align}
+where $C$ is some constant that depends on the isotope. Applying the thermal averaging we get
+\begin{align}
+  \sigma_\gamma(E,T) &= \frac{1}{v}  \int_{-\infty}^\infty \int_{-\infty}^\infty  \int_{-\infty}^\infty \frac{C}{ | \mathbf{v} - \mathbf{V} | } | \mathbf{v} - \mathbf{V} | M(\mathbf{V},T) dV_x dV_y dV_z \nonumber \\
+  &= \frac{C}{v}  \int_{-\infty}^\infty \int_{-\infty}^\infty  \int_{-\infty}^\infty  M(\mathbf{V},T) dV_x dV_y dV_z \nonumber \\
+  &= \frac{C}{v} .
+\end{align}
+This shows that capture and fission cross sections away from any resonances are unaffected by thermal motion. To understand why, consider our reasoning was that the likelihood of a reaction is proportional to the amount of time a neutron spends near the nucleus during its flight. For neutrons traveling in the same direction as the nuclei, this duration is prolonged. Neutrons that are traveling in opposite directions spend less time. On average these competing effects balance one another out.
+
+The scattering cross section is approximately constant away from resonances. Because the relative speed does not cancel in this case, we get a much more complicated integral because the relative velocity depends on both the nuclear speed $V$ and the cosine $\mu$. This integral is best done in spherical coordinates, but because it is rather tricky, we just quote the result:
+\begin{align}
+  \sigma_s(E,T) = \sigma_p \left[  \left( 1 + \frac{ k_B T }{ 2 A E } \right) \erf \left( \sqrt{\frac{AE}{k_B T}} \right) + \sqrt{ \frac{ k_B T }{ \pi A E } } \exp \left( -\frac{AE}{k_B T} \right) \right]. \label{Eq;Thermal_FreeGasScatteringXS}
+\end{align}
+We see that the potential scattering cross section gets corrected by an energy-dependent factor involving familiar exponentials and perhaps a less familiar function called the \emph{error function}. The error function was first studied in the domain of statistical inference, which led to its name. Unfortunately, even through neutron interactions have little to do with the topic, we are stuck with the name. The error function is defined by the following integral:
+\begin{align}
+   \text{erf}(x) = \frac{2}{\sqrt{\pi}} \int_0^x e^{-t^2}  dt .
+\end{align}
+This is available in any standard mathematics library.
+
+The above expression is not particularly intuitive, but the limiting behavior for low and high energies is insightful. At low energies, the error function goes to zero and its factor diverges. Using L'Hopital's rule, we can show that this term limits to a constant value. The second term, on the other hand, diverges because the exponential tends toward one while the $1/\sqrt{E}$ factor diverges. Because this is equivalent to inverse speed and the constant becomes small for small speed $v$, we can assert that:
+\begin{subequations}
+\begin{align}
+  \sigma(E,T) = \sqrt{ \frac{ k_B T }{ \pi A }  } \frac{\sigma_p}{v}, \quad E \ll k_B T.
+\end{align}
+The behavior of the scattering cross at low energies exhibits the same trend as capture cross sections.
+
+At high energies, the both the error function term and its factor converges to one. The exponential term tends toward zero. Therefore, for high energies, we can state
+\begin{align}
+  \sigma(E,T) = \sigma_s(E) = \sigma_p, \quad E \gg k_B T .
+\end{align}
+\end{subequations}
+It is often acceptable to make this assumption in the resonance region, which simplifies the analysis in reactor physics calculations.
+
+The behavior of this scattering cross section can be understood physically as well. It goes such that the thermal motion makes the cross section larger for smaller incident kinetic energies. In fact, the cross section diverges in the limit of zero energy. The reason for this effect is that scattering is a process where the neutron interacts with the surface potential. If a neutron is moving slowly relative to the background nuclei, the amount of interactions per unit distance will increase because many of these nuclei are moving toward the neutron and will effectively collide with the neutron. In the limit of zero kinetic energy, the neutron is stationary and eventually a scattering reaction will occur when the nucleus strikes it. Because the neutron is stationary in this case, the interactions per unit distance is infinite. We can also study the effect of the mass of the nucleus. The behavior is such that the effect of thermal motion is more pronounced for lighter nuclei as opposed to heavier ones at the same temperature. The reason for this is because more massive nuclei do not move as quickly to have the same kinetic energy, which means the thermal motion effects are less. For the sake of completeness: the higher temperature the larger the effect, which is quite intuitive.
+
+To summarize, there are three key points about the effect of thermal motion away from the resonances:
+\begin{enumerate}
+  \item[(a)] The capture and fission cross sections go as $1/v$ and are unaffected by thermal motion;
+  \item[(b)] The thermally averaged scattering cross section at low energies ($E \ll k_B T$) goes as $1/v$;
+  \item[(c)] The thermally averaged scattering cross section at high energies ($E \gg k_B T$) is essentially constant.
+\end{enumerate}
+
+\subsection{Resonance Doppler Broadening} \label{Sec:nuclearData_resonanceDopplerBroadening}
+
+Next, we turn our attention to the effect of thermal motion on the cross sections near the resonances. This effect is called \emph{resonance Doppler broadening} and is has a major impact on the absorption of neutrons.
+
+The process involves inserting the Breit-Wigner form of the capture cross section from Eq.~\eqref{Eq:nuclearData_breitWignerCaptureXS} as $\tilde{\sigma}$ into our expression for thermally averaging a cross section in Eq.~\eqref{Eq:nuclearData_thermalAveragedXS} and carrying out the integration. However, this integral is impossible to perform analytically. We can simplify the expression considerably if we assume that the target is heavy such that the neutron velocity is much greater than the velocity of the nucleus, and the energies of the resonances are much greater than the thermal energy. This is the case for a very broad range of resonances encountered in the context of reactor analysis. While we will still need to carry out the integral numerically, the resulting expression makes downstream reactor analysis calculations simpler.
+
+The energy corresponding to the relative speed $v_r = | \mathbf{v} - \mathbf{V} |$ between the neutron and the nucleus is
+\begin{align}
+  E_r = \frac{1}{2} m_n v_r^2 . \nonumber
+\end{align}
+(Technically this should be the reduced mass of the neutron-nucleus in the center-of-mass frame, but for heavy nuclei, the neutron mass is approximately the same). We are always free to define our coordinate system, so we select the $z$ axis to be along the neutron's direction of flight. In this coordinate system, we have the relative energy as
+\begin{align}
+  E_r = \frac{1}{2} m_n [ V_x^2 + V_y^2 + ( v - V_z )^2 ] . 
+\end{align}
+If the neutron velocity is large, then the relative speed can be well approximated by
+\begin{align}
+  v_r = V_x^2 + V_y^2 + V_z^2 + v^2 - 2 v V_z \approx v^2 - 2 v V_z.
+\end{align}
+This implies that, the relative energy is approximately
+\begin{align}
+  E_r \approx \frac{1}{2} m_n [ v^2 - 2 v V_z ] = E - \sqrt{ 2 m_n E } V_z . 
+\end{align}
+
+Given this, we return to our expression for thermally averaging a cross section, which we express as an integral over all three velocity components:
+\begin{align}
+  \sigma_\gamma(E,T) = \frac{1}{v} \int_{-\infty}^\infty \int_{-\infty}^\infty \int_{-\infty}^\infty v_r \tilde{\sigma_\gamma}(v_r) M(\mathbf{V},T) dV_x dV_y dV_z .
+\end{align}
+Based on the assumption that the Maxwell-Boltzmann distribution can be expressed as the product of three Gaussians,
+\begin{align}
+  M(\mathbf{V},T) = \left( \frac{ A m_n }{ 2 \pi k_B T } \right)^{3/2}
+  e^{-A m_n V_x^2 / ( 2 k_B T ) } e^{-A m_n V_y^2 / ( 2 k_B T ) }  e^{-A m_n V_z^2 / ( 2 k_B T ) } .
+\end{align}
+In our approximation of high neutron velocity relative to the nucleus, we see that $v_r$ is only a strong function of $V_z$. This permits us to factor them out of the integral and carry out the integrals over the $x$ and $y$ velocity components:
+\begin{align}
+  \sigma_\gamma(E,T) \approx \frac{1}{v} \int_{-\infty}^\infty v_r \tilde{\sigma_\gamma}(v_r) \left( \frac{ A m_n }{ 2 \pi k_B T } \right)^{1/2} \exp \left( -\frac{ A m_n V_z^2 }{ 2 k_B T } \right) dV_z .
+\end{align}
+
+Next we need to insert the Breit-Wigner formula. Before we do, let's introduce some notation to clean things up a bit. We have
+\begin{align}
+  \tilde{\sigma}_\gamma(v_r) =  \sigma_0 \frac{\Gamma_\gamma}{\Gamma}  \sqrt{ \frac{E_0}{E_r} } \frac{ 1 }{ 1 + y^2 } .
+\end{align}
+where we define the dimensionless variables
+\begin{subequations} \label{Eq:nuclearData_DopplerBroadening_TransformVariables}
+\begin{align}
+  x &= \frac{2}{\Gamma} ( E - E_0 ), \\
+  y &= \frac{2}{\Gamma} ( E_r - E_0 ) .
+\end{align}
+\end{subequations}
+These new variables are centered about the resonance and scaled by its width. (Apologies for reusing $x$ and $y$. These new variables are not the spatial coordinates. This is the conventional notation, and we just have to live with it.) Putting the speeds $v$ and $v_r$ in terms of their respective energy variables $E$ and $E_r$ and inserting the Breit-Wigner formula, we get
+\begin{align}
+  \sigma_\gamma(E,T) &\approx \sqrt{\frac{m_n}{2E}} \int_{-\infty}^\infty \sqrt{ \frac{2E_r}{m_n} }  \sigma_0 \frac{\Gamma_\gamma}{\Gamma}  \sqrt{ \frac{E_0}{E_r} } \frac{ 1 }{ 1 + y^2 } \left( \frac{ A m_n }{ 2 \pi k_B T } \right)^{1/2} \exp \left( -\frac{ A m_n V_z^2 }{ 2 k_B T } \right) dV_z \nonumber \\
+  &= \sigma_0  \frac{\Gamma_\gamma}{\Gamma} \sqrt{ \frac{E_0}{E} } \int_{-\infty}^\infty  \frac{ 1 }{ 1 + y^2 } \left( \frac{ A m_n }{ 2 \pi k_B T } \right)^{1/2} \exp \left( -\frac{ A m_n V_z^2 }{ 2 k_B T } \right) dV_z .
+\end{align} 
+
+Next, we write $V_z$ in terms of the dimensionless variables $x$ and $y$. After a bit of fairly simple algebra, we get
+\begin{align}
+  V_z = \frac{1}{\sqrt{2 m_n E} } \frac{\Gamma}{2} ( x - y ) .
+\end{align}
+The term in the exponential can be written as
+\begin{align}
+  \frac{ A m_n V_z^2 }{ 2 k_B T } = \frac{\Gamma^2}{4} \frac{A}{4 k_B T E} ( x - y )^2 .
+\end{align}
+Now we make another approximation. Because a resonance is typically quite narrow, the energy $E$ does not change all that much over the range that $\sigma_\gamma(v_r)$ is significant, so we can replace $E$ with $E_0$, the center of the energy, this lets us define the following:
+\begin{subequations}
+\begin{align}
+  \frac{ A m_n V_z^2 }{ 2 k_B T } &\approx \frac{\zeta^2}{4} ( x - y )^2 , \\
+  \zeta &= \frac{\Gamma}{\Gamma_D}, \label{Eq:nuclearData_DopplerBroadening_zeta} \\
+  \Gamma_D &= \sqrt{ \frac{ 4 k_B T E_0 }{ A } }.
+\end{align}
+\end{subequations}
+The quantity $\Gamma_D$ is referred to as the Doppler width. This is named as such because in the high-temperature limit, the resonance tends towards a Gaussian in energy with a width proportional to $\Gamma_D$. 
+
+Finally, we are going to perform a change of integration variables $V_z \rightarrow y$,
+\begin{align}
+  dV_z = -\frac{1}{\sqrt{2m_n E}} \frac{\Gamma}{2} dy .
+\end{align}
+We then have,
+\begin{align}
+  \sigma_\gamma(E,T) &\approx \sigma_0  \frac{\Gamma_\gamma}{\Gamma} \sqrt{ \frac{E_0}{E} } 
+  \left[ \int_{-2E/\Gamma}^\infty \frac{\Gamma}{2} \frac{1}{\sqrt{2 m_n E}} \left( \frac{ A m_n }{ 2 \pi k_B T } \right)^{1/2} \frac{1}{1+y^2} \exp \left( -\frac{\zeta^2}{4} ( x - y )^2 \right) dy \right] \nonumber \\
+  &\approx \sigma_0  \frac{\Gamma_\gamma}{\Gamma} \sqrt{ \frac{E_0}{E} } \left[  \frac{\Gamma}{2\sqrt{\pi}}
+  \int_{-\infty}^\infty \left( \frac{ A  }{ 4 k_B T E_0 } \right)^{1/2} \frac{1}{1+y^2} \exp \left( -\frac{\zeta^2}{4} ( x - y )^2 \right) dy \right] \nonumber \\
+  &= \sigma_0  \frac{\Gamma_\gamma}{\Gamma} \sqrt{ \frac{E_0}{E} }  \left[  \frac{\Gamma}{2\sqrt{\pi}\Gamma_D}
+  \int_{-\infty}^\infty \frac{1}{1+y^2} \exp \left( -\frac{\zeta^2}{4} ( x - y )^2 \right) dy \right] \nonumber \\
+  &= \sigma_0  \frac{\Gamma_\gamma}{\Gamma} \sqrt{ \frac{E_0}{E} } \left[  \frac{\zeta}{2\sqrt{\pi}}
+  \int_{-\infty}^\infty \frac{1}{1+y^2} \exp \left( -\frac{\zeta^2}{4} ( x - y )^2 \right) dy \right] .
+\end{align}
+Here we extended the integral from $-2E/\Gamma$ down to $-\infty$, which is not physical because the range would be over negative enerage, but since the resonance cross section decays rapidly away from the peak, we can do this without changing the actual result to yield a form that can be pretabulated independent of the neutron energy and resonance width.  The term in brackets is referred to as the $\psi$-Doppler broadening function, which depends on $\zeta$ and $x$. Recall the $\zeta$ maps to the temperature dependence and $x$ maps to the incident (lab-frame) neutron kinetic energy. This function is
+\begin{align}
+  \psi(\zeta,x) = \frac{\zeta}{2\sqrt{\pi}} \int_{-\infty}^\infty \frac{1}{1+y^2} \exp \left( -\frac{\zeta^2}{4} ( x - y )^2 \right) dy , \label{Eq:nuclearData_DopplerBroadening_psi}
+\end{align}
+and the Doppler broadened capture cross section is then
+\begin{align}
+  \sigma_\gamma(E,T) = \sigma_0  \frac{\Gamma_\gamma}{\Gamma} \sqrt{ \frac{E_0}{E} } \psi(\zeta,x) .
+\end{align}
+This form with the given approximations is called the \emph{Bethe-Placzek cross section}. The task then is to numerically evaluate the integral for a given temperature for a set of incident neutron energies $E$. 
+
+Here things may be getting a bit abstract, so let's take a step back and see what is happening as the result of these mathematical manipulations. If we analyze the behavior of the resonance, the observe an important tend. At low temperatures, the resonance cross section is highly peaked over a narrow range. As the temperature increases, the resulting cross section becomes shorter and wider. In other words, it broadens out such that resonance has a larger effective range of energies. This means that at higher temperatures, a greater number neutrons within a reactor, having a range of kinetic energies, will ``see'' the resonance. The net effect a low-enriched uranium system is that more neutrons are absorbed at higher temperatures than lower temperatures. This inherent Doppler feedback means that the reactor becomes less reactive with increasing temperature, which is a desirable safety feature. As a reactor designer, we need to ensure we have enough fuel such that the reactor can sustain a chain reaction at all normal operating temperatures, so this effect needs to be considered.
+
+So this was for capture and fission, but what about scattering? Well, we can go through a similar round of mathematical manipulations. These are not all that different from what we just did, other than being more complicated. The upshot of this is
+\begin{align}
+  \sigma_s(E,T) = \sigma_p + \sigma_0 \frac{\Gamma_n}{\Gamma} \psi(\zeta,x) + \sigma_0 \frac{a}{\lambdabar} \chi(\zeta,x) ,
+\end{align}
+where this new function $\chi(\zeta,x)$ can be found using numerical integration:
+\begin{align}
+  \chi(\zeta,x) = \frac{\zeta}{\sqrt{\pi}} \int_{-\infty}^\infty \frac{y}{1+y^2} \exp \left( -\frac{\zeta^2}{4} ( x - y )^2 \right) dy
+\end{align}
+As before, the scattering cross section has three parts. The first is the constant potential scattering cross section (effectively so for $E \gg k_B T$ for reasons discussed earlier), the second involves the familiar $\psi$ function from the capture resonance cross section, and the third is a new term because of interference between potential and resonance scattering. The effect of Doppler broadening on the scattering cross section cannot be ignored entirely, but is usually of secondary importance to the effect of increased absorption.
+
+You might be wondering about the approximations we made to get the Bethe-Placzek cross sections. With modern computers, we really did not have to do all of this and could have just brute forced our way through the integrals, and that is what is normally done in practice. For example, the $\psi$ function can be written in terms of a single integral over the relative speed as
+\begin{align}
+  \psi(\zeta,x) = \frac{\zeta}{2} \int_{-2E/\Gamma}^\infty \frac{1}{1 + y^2} 
+  \left[ \exp\left( \frac{(v - v_r(y))^2}{2\eta^2} \right) + \exp\left( \frac{(v - v_r(y))^2}{2\eta^2} \right) \right] dy
+\end{align}
+with
+\begin{align}
+  \eta^2 = \frac{ k_B T }{ A m_n } .
+\end{align}
+Recall that the relative speed $v_r$ is a function of $y$ by virtue of Eq.~\eqref{Eq:nuclearData_DopplerBroadening_TransformVariables} and $E_r = \frac{1}{2} m_n v_r^2$. We can resolve the two definitions of $\psi$ by: (a) neglecting the second exponential, which we expect to be small for large $v$; (b) approximating $( v - v_r )$ with $( v^2 - v_r^2 )/(2v)$, which is a bit less intuitive; and (c) extending the range to $-\infty$. In practice, using the Bethe-Placzek cross sections works fine except for large, sub-eV resonances at high (accident condition) temperatures. The most relevant case being the 0.296~eV resonance in the $^{239}$Pu fission cross section, which plays a significant part at the end of a reactor fuel cycle's life. 

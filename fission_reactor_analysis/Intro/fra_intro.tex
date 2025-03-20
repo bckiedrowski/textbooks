@@ -1,0 +1,109 @@
+%-------------------------------------------------------------------
+
+\thispagestyle{empty}
+\begin{center}
+\vspace*{1in}
+{\LARGE  {\bf 
+   NUCLEAR REACTOR ANALYSIS METHODS \vspace*{1in}  \\
+   Brian Kiedrowski \vspace*{1in}  \\
+   University of Michigan  \\   
+   Department of Nuclear Engineering \\ and Radiological Sciences }} \\
+    \vspace{3in} {\bf \large \today}
+\end{center}
+\pagebreak
+
+%-------------------------------------------------------------------
+
+\setcounter{page}{1}
+\setcounter{chapter}{0}
+\pagenumbering{roman}
+ \vspace*{1em}
+ \begin{center}
+ \copyright \; {\large Brian Christopher Kiedrowski \\
+ --------------------------------------- \\
+ All Rights Reserved \\
+ 2024 }
+ \end{center}
+ 
+ \vspace*{3em}
+\noindent \small This textbook may be freely used for educational purposes, either personal or to support teaching. If used as a textbook for a course, I request a courtesy email indicating as such. This allows for me to measure the impact of the works. \\
+
+\noindent  This textbook is provided on an ``AS IS'' BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any associated risks. \\
+
+\noindent LaTeX source for this textbook is available at \\ \url{https://github.com/bckiedrowski/textbooks}. \\
+
+\noindent The author (Brian Kiedrowski) retains rights to all parts of the source code and finished products. Derivative works based on these texts are permitted subject to the following restrictions:
+\begin{enumerate}
+  \item Brian Kiedrowski shall retain primary/first authorship followed by those authoring the derivative work.
+  \item The authorship in the lower-left corner of each page shall be present in all derivative works and shall include B.C. Kiedrowski as first author.
+  \item Neither the originals nor derivative works shall be commercialized, sold for profit, nor submitted to a publisher without the consent of Brian Kiedrowski.
+  \item All derivative works must include the text of the copyright page. Authors of derivative works may provide additional terms and conditions. In the event that there is a conflict, the terms and conditions in the original document shall take precedence.
+\end{enumerate}
+
+\noindent Contact information: \texttt{bckiedro@umich.edu}.
+\normalsize
+\newpage
+
+%-------------------------------------------------------------------
+%
+%\vspace*{2.4in}
+%These notes include material from the following sources:
+%
+%\begin{enumerate}
+%  \item A.M. Weinberg and E.P. Wigner, {\em The Physical Theory of
+%        Neutron Chain Reactors}, University of Chicago Press, Chicago 
+%        (1958).
+%  \item G.I. Bell and S. Glasstone, {\em Nuclear Reactor Theory}, Van
+%        Nostrand Reinhold, New York (1970)*
+%  \item J.J. Duderstadt and L.J. Hamilton, {\em Nuclear Reactor
+%        Analysis}, Wiley, New York (1976).*
+%  \item R.A. Rydin, {\em Nuclear Reactor Theory and Design}, second
+%        edition (1993).
+%  \item W.M. Stacey, {\em Nuclear Reactor Physics}, Wiley, New York
+%        (2001).
+%\end{enumerate}
+%
+%\vspace{10pt} 
+%* These books are recommended as supplementary texts. \\
+
+%The authors wish to thank the following individuals: Jipu Wang, who provided an extraordinary number of corrections to these notes; Matthew Gonzales, who provided information regarding analytic solutions to the heavy gas model in Sec.~\ref{Sec:Thermal_HeavyGasAnalyticSolution}; and Andrew Pavlou, who provided numerical $S(\alpha,\beta)$ data used in Sec.~\ref{Sec:Thermal_BoundScatteringPhysics_Solids_Graphite}.
+
+\tableofcontents
+
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\chapter*{Introduction}
+
+This textbook is targeted toward a graduate-level course designed to introduce students to the methods employed to analyze nuclear fission reactors. The specific focus here are conventional, low-enriched uranium fueled, light-water moderated power reactors. Many of the these techniques, however, apply to small modular, fast, or other advanced reactor designs with the disclaimer that each different reactor type carries with it its own unique characteristics, which inform the choice of analytical techniques and it is impractical to cover them all in a single, 3-credit graduate course. Indeed, the sheer volume of methods for conventional power reactors alone cannot be fully covered in such a course. 
+
+As a disclaimer, there is no one right way to analyze a nuclear reactor. The choices of topics and approaches in these notes are going to differ from any given set of analysis methods. Another limitation on scope of this text is that we will only treat steady-state methods, which is sufficient for a broad range of design questions. The analysis of reactor dynamics is left to a different course.
+
+These notes cover three broad topics:
+\begin{enumerate}
+  \item Cross section library generation. Nuclear data provides the fundamental constants that govern the interactions of free neutrons with matter. These datasets are extremely large and their direct use in reactor analysis is impractical. Therefore, we collapse these large datasets into smaller ones that permit us to perform calculations that have a suitable level of accuracy to make design decisions.
+  \item Pin and assembly level transport. Conventional reactors consist of fuel pins grouped into units called assemblies. The resolution requirements on these short length scales and inherent heterogeneities of the problem force us to perform detailed analysis by solving the neutron transport or linear Boltzmann equation.
+  \item Full-core analysis. A conventional power nuclear reactor consists of a few hundred fuel assemblies and performing a direct transport calculation on the entire core is infeasible for routine design analysis calculations. Fortunately, we are able to use diffusion-based methods to compute the global neutron distribution and use that information along with the transport calculations to reconstruct global pin powers. This chapter also treats the methods for fuel depletion.
+\end{enumerate} 
+
+From this we can infer that a reactor analysis calculation involves a sequence of calculations. The first step involves the creation of multigroup cross section libraries that are to be used in the downstream analyses. The next step involves a sequence of pin-level transport calculations with a fine energy-group structure with 10s to 100s of energy groups. These pin-level calculations are then used to homogenize and collapse cross sections into few-energy group (several groups to low tens) libraries at the assembly level, upon which different transport-based calculations are performed. These assembly level calculations are then used to further collapse and homogenize the assemblies into two or three group nodal diffusion calculations performed at the full-core level. Finally, the results of these calculations can be used to calculate pin-resolved powers and perform isotopic depletion analyses.
+
+\section*{Prospects of Reactor Analysis Methods}
+
+The outlined process describes reactor analysis methods since the 1970s. Since then and the present day, there have been enhancements in the details primarily owed to vast increase in computational power, but the general layout is largely the same where the problem is broken up into a hierarchy of smaller problems, solved, and joined together. 
+
+This brings up the question of what it would take to perform a brute force transport calculation with the same level of resolution that the hierarchy-based methods are capable of. To do this, we need to solve for the neutron distribution in each spatial zone, for each energy group, and over a range of discrete directions to resolve the phase space well enough. A back of the envelope calculation gives the following:
+\begin{enumerate}
+  \item Each cylindrical pin would require about a combined 100 radial and azimuthal zones per axial segment with perhaps 100 axial segments. This implies about $10^4$ spatial elements per fuel pin. Each assembly has on the order of a several tens to few hundred pins per assembly depending on the design, which we can take to be about $10^2$ pins per assembly. A conventional reactor involves a few hundred assemblies, so about $10^2$ assemblies for a crude order-of-magnitude analysis. This equates to about $10^8$ spatial zones throughout the reactor.
+  \item The detailed energy resolution for a multigroup calculation is on the order of $10^2$ energy groups. If we want to remove the need for a multigroup cross section library, we would need on the order of $10^5$ energy grid points.
+  \item The directional resolution requires on the order of $10^2$ ordinates.
+\end{enumerate}
+Taking these together, we obtain a total of $10^{12}$ unknowns that need to be solved each depletion step with the fine multigroup structure or $10^{15}$ unknowns with a detailed energy treatment.
+
+Since the early 2010s, there have been demonstrations of full-core, pin-resolved transport calculations using either Monte Carlo or deterministic methods (primarily using discrete ordinates or the method of characteristics). Currently, the DENOVO transport solver has demonstrated this calculation using about $10^{12}$ unknowns on one of the largest computers in the world. Monte Carlo methods have also been used, but require a large amount of computational time on a large computer to converge the solution to the required level of accuracy. It is therefore likely these types of calculations will remain in the realm of benchmarking or perhaps final design calculations in the near term.
+
+While predictions of the future are always difficult, it is unlikely in the foreseeable future that reactor analysis methods that employ a hierarchical approach will become obsolete for routine design analyses given the sheer resource requirements needed. While computers have been getting more powerful at an exponential rate according to Moore's Law, there are fundamental physical limits on what is possible and, as of 2024, there is some evidence to suggest that Moore's law is coming to an end. Currently, the largest computer in the world is capable of performing about 10 exaflops (1 exaflop is about $10^{18}$ floating point operations per second) at an energy cost of about 1-2~MW per exaflop. Even with optimistic projections on efficiency gains on energy use per flop, it is very unlikely that (barring some dark horse technology like quantum computers) direct, detailed, full-core transport calculations will become economically feasible considering the existing methods capable of running on 1980s hardware are adequate.
+
+At the further risk of making predictions, reactor analysis methods are likely to continue to evolve in the future. The late 2010s has seen the emergence of methods of machine learning and artificial intelligence that can be grouped under the heading of advanced statistical methods that sift through large datasets. In essence, these methods identify non-intuitive (at least to a human) correlations within the data and the hope is that these can be used to create reduced order or surrogate models that can ``solve'' practical problems more efficiently than conventional methods. And indeed there are some encouraging results from these techniques applied to the solution of complex partial differential equations including those applied to nuclear reactors. Going forward, it is likely that these advanced statistical methods will retain some degree of hierarchy, just that it may be not the intuitive pin, assembly, to full core level and be ones that generalize to advanced reactors.
+
+So while the material in this text may seem dated and could become outdated in the future, the fact remains that a broad range of contemporary nuclear reactor analysis techniques discussed herein are still in use today and are likely to remain in use, at least in the near term. With these perspectives given, we now embark on the topic of nuclear reactor analysis methods.

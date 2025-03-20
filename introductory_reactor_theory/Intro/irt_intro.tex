@@ -1,0 +1,107 @@
+%\documentclass [11pt]{article}
+%\usepackage{epsf,epsfig,latexsym}
+%\usepackage{amsmath,amssymb,amstext}
+%\usepackage{bm}
+%%\usepackage{showkeys}
+%\pagestyle{plain} 
+%\renewcommand{\baselinestretch}{1.0}
+%\setlength{\topmargin}{-0.4in} 
+%\setlength{\oddsidemargin}{0.25in} 
+%\setlength{\evensidemargin}{0.25in} 
+%\setlength{\textwidth}{6.0in} 
+%\setlength{\textheight}{9.0in} 
+%\allowdisplaybreaks
+%%
+%\renewcommand{\theequation}{\arabic{section}.\arabic{equation}}
+%%
+%\begin{document}  
+%\baselineskip=0.20in
+
+%-------------------------------------------------------------------
+
+\thispagestyle{empty}
+\begin{center}
+\vspace*{1.4in}
+{\LARGE  {\bf UNIVERSITY OF MICHIGAN   \vspace*{0.7in} \\   
+   Department of Nuclear Engineering \\ and Radiological Sciences
+      \vspace*{0.7in} \\
+   INTRODUCTORY NUCLEAR REACTOR THEORY \vspace*{0.7in} \\
+   Brian Kiedrowski }} \\
+    \vspace{1cm} {\bf \today }
+\end{center}
+\pagebreak
+
+%-------------------------------------------------------------------
+
+\setcounter{page}{1}
+\setcounter{chapter}{0}
+\pagenumbering{roman}
+
+ %\vspace*{3.0in}
+ \begin{center}
+ \copyright \; {\large Brian Christopher Kiedrowski \\
+ --------------------------------------- \\
+ All Rights Reserved \\
+ 2024 }
+ \end{center}
+ 
+ \vspace*{3em}
+\noindent \small This textbook may be freely used for educational purposes, either personal or to support teaching. If used as a textbook for a course, I request a courtesy email indicating as such. This allows for me to measure the impact of the works. \\
+
+\noindent  This textbook is provided on an ``AS IS'' BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied, including, without limitation, any warranties or conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are solely responsible for determining the appropriateness of using or redistributing the Work and assume any associated risks. \\
+
+\noindent LaTeX source for this textbook is available at \\ \url{https://github.com/bckiedrowski/textbooks}. \\
+
+\noindent The author (Brian Kiedrowski) retains rights to all parts of the source code and finished products. Derivative works based on these texts are permitted subject to the following restrictions:
+\begin{enumerate}
+  \item Brian Kiedrowski shall retain primary/first authorship followed by those authoring the derivative work.
+  \item The authorship in the lower-left corner of each page shall be present in all derivative works and shall include B.C. Kiedrowski as first author.
+  \item Neither the originals nor derivative works shall be commercialized, sold for profit, nor submitted to a publisher without the consent of Brian Kiedrowski.
+  \item All derivative works must include the text of the copyright page. Authors of derivative works may provide additional terms and conditions. In the event that there is a conflict, the terms and conditions in the original document shall take precedence.
+\end{enumerate}
+
+\noindent Contact information: \texttt{bckiedro@umich.edu}.
+\normalsize
+ 
+\newpage
+
+%-------------------------------------------------------------------
+%
+%\vspace*{2.4in}
+%These notes include material from the following sources:
+%
+%\begin{enumerate}
+%  \item A.M. Weinberg and E.P. Wigner, {\em The Physical Theory of
+%        Neutron Chain Reactors}, University of Chicago Press, Chicago 
+%        (1958).
+%  \item G.I. Bell and S. Glasstone, {\em Nuclear Reactor Theory}, Van
+%        Nostrand Reinhold, New York (1970)*
+%  \item J.J. Duderstadt and L.J. Hamilton, {\em Nuclear Reactor
+%        Analysis}, Wiley, New York (1976).*
+%  \item R.A. Rydin, {\em Nuclear Reactor Theory and Design}, second
+%        edition (1993).
+%  \item W.M. Stacey, {\em Nuclear Reactor Physics}, Wiley, New York
+%        (2001).
+%\end{enumerate}
+%
+%\vspace{10pt} 
+%* These books are recommended as supplementary texts. \\
+
+%The authors wish to thank the following individuals: Jipu Wang, who provided an extraordinary number of corrections to these notes; Matthew Gonzales, who provided information regarding analytic solutions to the heavy gas model in Sec.~\ref{Sec:Thermal_HeavyGasAnalyticSolution}; and Andrew Pavlou, who provided numerical $S(\alpha,\beta)$ data used in Sec.~\ref{Sec:Thermal_BoundScatteringPhysics_Solids_Graphite}.
+
+\tableofcontents
+
+\clearpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\chapter*{Introduction}
+
+This textbook is targeted toward upper-level undergraduates and first-year graduate students that introduces the fundamental theory behind neutron-nuclear interactions and the physics of nuclear fission reactors. The course is structured to incorporate the following chapters:
+\begin{itemize}
+  \item Relevant nuclear physics needed for the analysis of nuclear fission reactors is covered in the first major chapter. The purpose of this chapter is to connect basic nuclear physics concepts with the application, providing a basic understanding of how nuclear interaction coefficients are obtained. The chapter culminates by introducing nuclear data, which are the input parameters used in calculations, and the Evaluated Nuclear Data File (ENDF) library from which these may be obtained.
+  \item The second major chapter develops the theories for understanding the motion of neutrons, which is crucial for the analysis of any nuclear fission reactor. There are two models for neutron motion. The first is neutron transport, which is generally considered the ``correct'' theory but requires specialized techniques with a significant amount of mathematical rigor to solve. Fortunately, this model is often unnecessary for many scenarios encountered when analyzing nuclear fission reactors, so one can use a simpler model: neutron diffusion theory. This chapter connects neutron transport to diffusion and then focuses on developing both analytical and numerical solutions of the latter. %First solutions for the case of a prescribed fixed source are considered assuming all neutrons travel the same speed (no energy dependence). Next, the criticality condition upon which a nuclear fission reactor is in a state where the chain reaction is self sustaining is developed. Finally, energy dependence of the neutron diffusion equation is introduced and the multigroup approximation is derived.
+  \item The neutron diffusion equation has coefficients, or multigroup cross sections, that need to be determined first. These cross sections require that a representative local neutron spectrum be obtained from a slowing down or thermalization calculation. This chapter details how these calculations are performed, first for the simplified case of an infinite homogeneous medium and then to a more realistic fuel-moderator lattice. The challenge is that the nuclear data has numerous resonances, which cause localized dips in the neutron spectrum, and special methods for handling this effect are needed.
+  \item The final chapter describes the kinetics of nuclear fission reactors and introduces the concepts of nuclear reactivity, feedback, and control. The point kinetics model describes the behavior of the system on the short (microseconds to minutes) timescale. The isotopic inventory of the nuclear reactor changes significantly over longer time scales. The xenon-iodine transient is the most important effect in thermal reactors, occurring over the course of hours or days. The depletion of fuel and burnable absorbers becomes important on the timescale of weeks and months. Analysis techniques for these scenarios are covered.
+\end{itemize}
+The expected mathematical preparation for this course is an undergraduate course in ordinary differential equations. Some knowledge of numerical linear algebra and basic partial differential equations is also quite helpful, but not strictly necessary. 
+
